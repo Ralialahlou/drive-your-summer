@@ -964,7 +964,6 @@
     [dir="rtl"] .ring-wrap      { direction: rtl; }
     [dir="rtl"] #sticky-cta     { flex-direction: row-reverse; }
     [dir="rtl"] .sticky-info    { text-align: right; }
-    [dir="rtl"] .showcase-inner { flex-direction: row-reverse; }
     @media(min-width:880px) {
       [dir="rtl"] .showcase-inner { flex-direction: row-reverse; }
     }
@@ -1082,6 +1081,14 @@
 
       /* ── Dash body tighter ── */
       .dash-body { padding: 22px 16px; }
+
+      /* ── Car section: full-width carousel on mobile, centered text ── */
+      .showcase-inner { gap: 28px; }
+      .car-visual { width: 100%; }
+      .carousel-outer { border-radius: 10px; }
+      [dir="rtl"] .car-info { text-align: center; }
+      [dir="rtl"] .car-specs { justify-content: center; }
+      [dir="rtl"] .car-info > .btn { width: 100%; }
     }
     @media(max-width:480px) {
       .btn-lg  { padding: 16px 28px; font-size: .82rem; }
@@ -1401,17 +1408,25 @@
       <!-- Top 20 info card -->
       <div class="dash-card dash-wide">
         <p class="dash-card-title" data-i18n="dash.howtowin">Comment gagner la voiture ?</p>
-        <p style="font-size:.9rem;color:var(--text-mid);line-height:1.8">
+        <p class="fr-txt" style="font-size:.9rem;color:var(--text-mid);line-height:1.8">
           À la clôture de la campagne le <strong style="color:var(--bleu)">27 juillet 2026</strong>, Morocco Mall sélectionnera les
           <strong style="color:var(--corail)">20 participants ayant le plus grand total d'achats cumulés</strong>.
           L'un d'eux remportera la <strong style="color:var(--bleu)">Soueast S05</strong> d'une valeur de 300 000 MAD.
           Soumettez un maximum de tickets pour maximiser votre total et figurer dans le Top 20 !
         </p>
+        <p class="ar-txt" style="font-size:.9rem;color:var(--text-mid);line-height:2">
+          في نهاية الحملة بتاريخ <strong style="color:var(--bleu)">27 يوليوز 2026</strong>، سيختار موروكو مول
+          <strong style="color:var(--corail)">أفضل 20 مشارك من حيث إجمالي المشتريات المتراكمة</strong>.
+          سيفوز أحدهم بسيارة <strong style="color:var(--bleu)">سوييست S05</strong> بقيمة 300.000 درهم.
+          قدّم أكبر عدد من الفواتير لتعظيم إجماليك والدخول في أفضل 20!
+        </p>
         <div class="top20-box">
           <span style="font-size:1.5rem">🏆</span>
           <div>
-            <p style="font-size:.78rem;font-weight:600;color:var(--text)">Votre objectif : figurer dans le Top 20</p>
-            <p style="font-size:.72rem;color:var(--text-muted)">Plus votre total est élevé, plus vous avez de chances d'être sélectionné(e).</p>
+            <p class="fr-txt" style="font-size:.78rem;font-weight:600;color:var(--text)">Votre objectif : figurer dans le Top 20</p>
+            <p class="ar-txt" style="font-size:.78rem;font-weight:600;color:var(--text)">هدفك: الدخول في أفضل 20</p>
+            <p class="fr-txt" style="font-size:.72rem;color:var(--text-muted)">Plus votre total est élevé, plus vous avez de chances d'être sélectionné(e).</p>
+            <p class="ar-txt" style="font-size:.72rem;color:var(--text-muted)">كلما ارتفع إجماليك، زادت فرصك في الاختيار.</p>
           </div>
         </div>
       </div>
@@ -1559,8 +1574,8 @@
   <div class="modal">
     <div class="modal-hd">
       <div class="modal-hd-text">
-        <h3>Soumettre un ticket</h3>
-        <p>Photo claire du ticket + montant total.</p>
+        <h3 data-i18n="upload.title">Soumettre un ticket</h3>
+        <p data-i18n="upload.sub">Photo claire du ticket + montant total.</p>
       </div>
       <button class="btn-close" onclick="closeOverlay('overlay-upload')">✕</button>
     </div>
@@ -1577,30 +1592,30 @@
             <polyline points="21 15 16 10 5 21"/>
           </svg>
         </span>
-        <h4>Photo de votre ticket</h4>
-        <p>Appuyez ici pour déposer votre photo</p>
+        <h4 data-i18n="upload.zone.h">Photo de votre ticket</h4>
+        <p data-i18n="upload.zone.p">Appuyez ici pour déposer votre photo</p>
         <img id="upload-preview" class="upload-preview" alt="Aperçu">
       </div>
       <p class="upload-fname" id="upload-fname"></p>
       <div class="form-g">
-        <label for="upload-amount">Montant total du ticket</label>
+        <label for="upload-amount" data-i18n="upload.label">Montant total du ticket</label>
         <div class="amount-wrap">
           <input class="form-input" id="upload-amount" type="number" min="1000" step="0.01" placeholder="1 000" required>
           <span class="amount-sfx">MAD</span>
         </div>
-        <p style="font-size:.7rem;color:var(--text-muted);margin-top:5px">Minimum 1 000 MAD pour être éligible.</p>
+        <p data-i18n="upload.min" style="font-size:.7rem;color:var(--text-muted);margin-top:5px">Minimum 1 000 MAD pour être éligible.</p>
       </div>
-      <button class="btn btn-primary" style="width:100%" onclick="submitUpload()">
+      <button class="btn btn-primary" style="width:100%" onclick="submitUpload()" data-i18n="upload.submit">
         🚗 Valider ma participation
       </button>
     </div>
     <div class="success-screen" id="upload-success">
       <span class="success-icon">🎉</span>
-      <h3>Ticket enregistré !</h3>
-      <p>Votre ticket est enregistré. Continuez à soumettre pour monter dans le classement et intégrer le Top 20 !</p>
+      <h3 data-i18n="upload.ok.h">Ticket enregistré !</h3>
+      <p data-i18n="upload.ok.p">Votre ticket est enregistré. Continuez à soumettre pour monter dans le classement et intégrer le Top 20 !</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px">
-        <button class="btn btn-or btn-sm" onclick="addAnotherTicket()">Ajouter un autre ticket</button>
-        <button class="btn btn-outline-bleu btn-sm" onclick="goToDashboard()">Mon tableau de bord</button>
+        <button class="btn btn-or btn-sm" onclick="addAnotherTicket()" data-i18n="upload.another">Ajouter un autre ticket</button>
+        <button class="btn btn-outline-bleu btn-sm" onclick="goToDashboard()" data-i18n="cta.dash">Mon tableau de bord</button>
       </div>
     </div>
   </div>
@@ -1657,6 +1672,16 @@
       'receipts.add':  'Ajouter un ticket',
       'sticky.days':   'j restants',
       'sticky.line2':  'Gagnez la Soueast S05 — 300 000 MAD',
+      'upload.title':  'Soumettre un ticket',
+      'upload.sub':    'Photo claire du ticket + montant total.',
+      'upload.zone.h': 'Photo de votre ticket',
+      'upload.zone.p': 'Appuyez ici pour déposer votre photo',
+      'upload.label':  'Montant total du ticket',
+      'upload.min':    'Minimum 1 000 MAD pour être éligible.',
+      'upload.submit': '🚗 Valider ma participation',
+      'upload.ok.h':   'Ticket enregistré !',
+      'upload.ok.p':   'Votre ticket est enregistré. Continuez à soumettre pour monter dans le classement et intégrer le Top 20 !',
+      'upload.another':'Ajouter un autre ticket',
     },
     ar: {
       'meta.title':    'درايف يور صمر – اربح سيارة سوييست S05 من موروكو مول',
@@ -1689,6 +1714,16 @@
       'receipts.add':  'أضف فاتورة',
       'sticky.days':   'أيام متبقية',
       'sticky.line2':  'فوز بسوييست S05 — 300.000 درهم',
+      'upload.title':  'تقديم فاتورة',
+      'upload.sub':    'صورة واضحة للفاتورة + المبلغ الإجمالي.',
+      'upload.zone.h': 'صورة فاتورتك',
+      'upload.zone.p': 'اضغط هنا لإضافة صورتك',
+      'upload.label':  'المبلغ الإجمالي للفاتورة',
+      'upload.min':    'الحد الأدنى 1.000 درهم للأهلية.',
+      'upload.submit': '🚗 تأكيد مشاركتي',
+      'upload.ok.h':   'تم تسجيل الفاتورة!',
+      'upload.ok.p':   'تم تسجيل فاتورتك. واصل التقديم للتسلق في الترتيب والدخول في أفضل 20!',
+      'upload.another':'إضافة فاتورة أخرى',
     },
   };
 
@@ -1733,19 +1768,19 @@
 
   const LEVELS = [
     /* page 1 */
-    { name: 'Co-Pilote',    min: 1000,   max: 5000,    emoji: '🏁' },
-    { name: 'Pilote',       min: 5000,   max: 10000,   emoji: '🚗' },
-    { name: 'Grand Pilote', min: 10000,  max: 20000,   emoji: '🏎️' },
-    { name: 'Champion',     min: 20000,  max: 30000,   emoji: '🥇' },
-    { name: 'Élite',        min: 30000,  max: 40000,   emoji: '⭐' },
+    { name: 'Co-Pilote',    nameAr: 'مساعد سائق',    min: 1000,   max: 5000,    emoji: '🏁' },
+    { name: 'Pilote',       nameAr: 'سائق',           min: 5000,   max: 10000,   emoji: '🚗' },
+    { name: 'Grand Pilote', nameAr: 'سائق متمرس',    min: 10000,  max: 20000,   emoji: '🏎️' },
+    { name: 'Champion',     nameAr: 'بطل',            min: 20000,  max: 30000,   emoji: '🥇' },
+    { name: 'Élite',        nameAr: 'نخبة',           min: 30000,  max: 40000,   emoji: '⭐' },
     /* page 2 */
-    { name: 'Expert',       min: 40000,  max: 50000,   emoji: '💫' },
-    { name: 'Expert Or',    min: 50000,  max: 60000,   emoji: '✨' },
-    { name: 'VIP',          min: 60000,  max: 70000,   emoji: '👑' },
-    { name: 'VIP Or',       min: 70000,  max: 80000,   emoji: '💎' },
-    { name: 'Prestige',     min: 80000,  max: 90000,   emoji: '🔥' },
-    { name: 'Prestige Or',  min: 90000,  max: 100000,  emoji: '🌟' },
-    { name: 'Légende',      min: 100000, max: Infinity, emoji: '🏆' },
+    { name: 'Expert',       nameAr: 'خبير',           min: 40000,  max: 50000,   emoji: '💫' },
+    { name: 'Expert Or',    nameAr: 'خبير ذهبي',     min: 50000,  max: 60000,   emoji: '✨' },
+    { name: 'VIP',          nameAr: 'VIP',            min: 60000,  max: 70000,   emoji: '👑' },
+    { name: 'VIP Or',       nameAr: 'VIP ذهبي',      min: 70000,  max: 80000,   emoji: '💎' },
+    { name: 'Prestige',     nameAr: 'بريستيج',       min: 80000,  max: 90000,   emoji: '🔥' },
+    { name: 'Prestige Or',  nameAr: 'بريستيج ذهبي', min: 90000,  max: 100000,  emoji: '🌟' },
+    { name: 'Légende',      nameAr: 'أسطورة',        min: 100000, max: Infinity, emoji: '🏆' },
   ];
   const LEVELS_PAGE1 = 5; // how many levels on page 1
   let levelPage = 0;
@@ -1969,18 +2004,17 @@
 
   function submitUpload() {
     const amount = parseFloat(document.getElementById('upload-amount').value);
-    if (!state.pendingDataURL) { showToast('📷 Ajoutez une photo de votre ticket.', 'or'); return; }
-    if (!amount || amount < 1000) { showToast('⚠️ Le montant minimum est 1 000 MAD.', 'or'); return; }
+    if (!state.pendingDataURL) { showToast(currentLang==='ar' ? '📷 أضف صورة فاتورتك.' : '📷 Ajoutez une photo de votre ticket.', 'or'); return; }
+    if (!amount || amount < 1000) { showToast(currentLang==='ar' ? '⚠️ الحد الأدنى للمبلغ هو 1.000 درهم.' : '⚠️ Le montant minimum est 1 000 MAD.', 'or'); return; }
     state.receipts.push({
       id: Date.now(),
-      date: new Date().toLocaleDateString('fr-MA', { day:'2-digit', month:'long', year:'numeric' }),
       amount,
       image: state.pendingDataURL,
     });
     saveState();
     document.getElementById('upload-form-wrap').style.display = 'none';
     document.getElementById('upload-success').classList.add('show');
-    showToast('🎉 Ticket enregistré ! Votre total a été mis à jour.', 'success');
+    showToast(currentLang==='ar' ? '🎉 تم تسجيل الفاتورة! تم تحديث إجماليك.' : '🎉 Ticket enregistré ! Votre total a été mis à jour.', 'success');
     updateNavActions();
   }
 
@@ -2102,17 +2136,24 @@
     const nextEl  = document.getElementById('ring-next');
     if (totEl) totEl.textContent = total.toLocaleString('fr-MA');
 
+    const isAr  = currentLang === 'ar';
+    const locale = isAr ? 'ar-MA' : 'fr-MA';
+    const mad    = isAr ? 'درهم' : 'MAD';
+    const lName  = l => isAr ? l.nameAr : l.name;
+
     let pct = 0;
     if (lvlIdx >= 0) {
       const cur  = LEVELS[lvlIdx];
       const next = LEVELS[lvlIdx + 1];
       pct = next ? (total - cur.min) / (next.min - cur.min) : 1;
-      if (badgeEl) badgeEl.textContent = cur.emoji + ' ' + cur.name;
-      if (nextEl)  nextEl.textContent  = next ? `Prochain : ${next.name} à ${next.min.toLocaleString('fr-MA')} MAD` : 'Niveau maximum atteint !';
+      if (badgeEl) badgeEl.textContent = cur.emoji + ' ' + lName(cur);
+      if (nextEl)  nextEl.textContent  = next
+        ? (isAr ? `التالي: ${next.emoji} ${lName(next)} — ${next.min.toLocaleString(locale)} ${mad}` : `Prochain : ${next.name} à ${next.min.toLocaleString(locale)} MAD`)
+        : (isAr ? 'وصلت للمستوى الأقصى!' : 'Niveau maximum atteint !');
     } else {
       pct = total / LEVELS[0].min;
-      if (badgeEl) badgeEl.textContent = '— En route …';
-      if (nextEl)  nextEl.textContent  = 'Prochain : Co-Pilote à 1 000 MAD';
+      if (badgeEl) badgeEl.textContent = isAr ? '— في الطريق…' : '— En route …';
+      if (nextEl)  nextEl.textContent  = isAr ? `التالي: ${LEVELS[0].emoji} ${LEVELS[0].nameAr} — 1.000 ${mad}` : 'Prochain : Co-Pilote à 1 000 MAD';
     }
     setTimeout(() => { if (ringEl) ringEl.style.strokeDashoffset = 452 * (1 - Math.min(pct,1)); }, 100);
 
@@ -2127,18 +2168,22 @@
       const rows = pageLevels.map((l, i) => {
         const realIdx = pageStart + i;
         const done = total >= l.min, cur = realIdx === lvlIdx;
+        const rangeMax = l.max === Infinity ? `${mad} +` : `– ${l.max.toLocaleString(locale)} ${mad}`;
         return `<div class="level-item ${cur?'current':''} ${done&&!cur?'done':''}">
           <div class="level-dot"></div>
           <div class="level-info">
-            <p class="level-name">${l.emoji} ${l.name}</p>
-            <p class="level-range">${l.min.toLocaleString('fr-MA')} ${l.max===Infinity?'MAD +':'– '+l.max.toLocaleString('fr-MA')+' MAD'}</p>
+            <p class="level-name">${l.emoji} ${lName(l)}</p>
+            <p class="level-range">${l.min.toLocaleString(locale)} ${rangeMax}</p>
           </div>
           <span class="level-tick">${done?'✓':''}</span>
         </div>`;
       }).join('');
+      const lockedTitle = isAr
+        ? 'ابلغ مستوى نخبة (30.000 درهم) لفتح المستويات العليا'
+        : 'Atteignez le niveau Élite (30 000 MAD) pour débloquer les niveaux supérieurs';
       const page2Btn = eliteReached
         ? `<button class="level-page-btn ${levelPage===1?'active':''}" onclick="setLevelPage(1)">2</button>`
-        : `<button class="level-page-btn locked" disabled title="Atteignez le niveau Élite (30 000 MAD) pour débloquer les niveaux supérieurs">🔒</button>`;
+        : `<button class="level-page-btn locked" disabled title="${lockedTitle}">🔒</button>`;
       const pagination = `<div class="level-pages">
         <button class="level-page-btn ${levelPage===0?'active':''}" onclick="setLevelPage(0)">1</button>
         ${page2Btn}
@@ -2152,29 +2197,41 @@
 
   /* ─── RECEIPTS ───────────────────────────────────── */
   function renderReceipts() {
-    const total = userTotal();
-    const subEl = document.getElementById('receipts-sub');
-    if (subEl) subEl.textContent = state.receipts.length
-      ? `${state.receipts.length} participation${state.receipts.length>1?'s':''} — total ${total.toLocaleString('fr-MA')} MAD`
-      : 'Aucune participation encore.';
+    const isAr  = currentLang === 'ar';
+    const locale = isAr ? 'ar-MA' : 'fr-MA';
+    const mad    = isAr ? 'درهم' : 'MAD';
+    const total  = userTotal();
+    const subEl  = document.getElementById('receipts-sub');
+    const count  = state.receipts.length;
+    if (subEl) subEl.textContent = count
+      ? (isAr
+          ? `${count.toLocaleString(locale)} مشاركة — الإجمالي ${total.toLocaleString(locale)} ${mad}`
+          : `${count} participation${count>1?'s':''} — total ${total.toLocaleString(locale)} MAD`)
+      : (isAr ? 'لا توجد مشاركات بعد.' : 'Aucune participation encore.');
     const wrap = document.getElementById('receipts-list-wrap');
     if (!wrap) return;
-    if (!state.receipts.length) {
-      wrap.innerHTML = `<div class="empty-state"><span class="empty-icon">🧾</span><p>Aucun ticket soumis pour l'instant.</p><button class="btn btn-primary" style="margin-top:20px" onclick="openUpload()">Soumettre mon premier ticket</button></div>`;
+    if (!count) {
+      wrap.innerHTML = isAr
+        ? `<div class="empty-state"><span class="empty-icon">🧾</span><p>لم تُقدِّم أي فاتورة بعد.</p><button class="btn btn-primary" style="margin-top:20px" onclick="openUpload()">أضف أول فاتورة</button></div>`
+        : `<div class="empty-state"><span class="empty-icon">🧾</span><p>Aucun ticket soumis pour l'instant.</p><button class="btn btn-primary" style="margin-top:20px" onclick="openUpload()">Soumettre mon premier ticket</button></div>`;
       return;
     }
-    wrap.innerHTML = `<div class="receipts-list">${[...state.receipts].reverse().map(r=>`
-      <div class="receipt-row">
+    const badge  = isAr ? '✓ مقدَّم' : '✓ Soumis';
+    const addBtn = isAr ? 'أضف فاتورة' : 'Ajouter un ticket';
+    wrap.innerHTML = `<div class="receipts-list">${[...state.receipts].reverse().map(r=>{
+      const dateStr = new Date(r.id).toLocaleDateString(locale, { day:'2-digit', month:'long', year:'numeric' });
+      return `<div class="receipt-row">
         <img class="receipt-thumb" src="${r.image}" alt="Ticket">
         <div class="receipt-info">
-          <p class="receipt-date">${r.date}</p>
-          <p class="receipt-amount">${r.amount.toLocaleString('fr-MA')} MAD</p>
+          <p class="receipt-date">${dateStr}</p>
+          <p class="receipt-amount">${r.amount.toLocaleString(locale)} ${mad}</p>
         </div>
-        <span class="receipt-badge">✓ Soumis</span>
-      </div>`).join('')}
+        <span class="receipt-badge">${badge}</span>
+      </div>`;
+    }).join('')}
     </div>
     <div style="text-align:center;margin-top:32px">
-      <button class="btn btn-primary" onclick="openUpload()">Ajouter un ticket</button>
+      <button class="btn btn-primary" onclick="openUpload()" data-i18n="receipts.add">${addBtn}</button>
     </div>`;
   }
 
