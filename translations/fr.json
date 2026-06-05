@@ -1,0 +1,44 @@
+{
+  "meta.title":    "Drive Your Summer – Gagnez une Soueast S05 à Morocco Mall",
+  "meta.desc":     "Participez au jeu-concours Morocco Mall du 6 au 27 juillet 2026. Dépensez 1 000 MAD, uploadez votre ticket et tentez de gagner une Soueast S05 électrique à 300 000 MAD.",
+
+  "nav.sub":       "Morocco Mall × Soueast S05",
+  "nav.cta":       "Participer",
+
+  "hero.tag":      "6 juillet – 27 juillet 2026",
+  "hero.sub":      "Drive into summer. Win the ultimate reward.",
+  "hero.cta1":     "Télécharger mon ticket",
+  "hero.cta2":     "Voir les règles",
+  "hero.cdlbl":    "Fin de la campagne dans",
+  "hero.scroll":   "Découvrir",
+
+  "cd.d":          "Jours",
+  "cd.h":          "Heures",
+  "cd.m":          "Minutes",
+  "cd.s":          "Secondes",
+
+  "rules.eyebrow": "La règle du jeu",
+  "rules.cta1":    "Je participe maintenant",
+  "rules.cta2":    "Voir la voiture à gagner",
+
+  "car.cta":       "🏎️ Je veux cette voiture !",
+
+  "cta.btn1":      "Télécharger mon ticket maintenant",
+  "cta.dash":      "Mon tableau de bord",
+
+  "dash.back":     "Retour",
+  "dash.welcome":  "Bienvenue,",
+  "dash.sub":      "Suivez votre progression et téléchargez de nouveaux tickets.",
+  "dash.logout":   "Se déconnecter",
+  "dash.newticket":"Nouveau ticket",
+  "dash.mytickets":"Mes tickets →",
+  "dash.progress": "Ma progression",
+  "dash.levels":   "Niveaux de participation",
+  "dash.howtowin": "Comment gagner la voiture ?",
+
+  "receipts.back": "Tableau de bord",
+  "receipts.add":  "Ajouter un ticket",
+
+  "sticky.days":   "j restants",
+  "sticky.line2":  "Gagnez la Soueast S05 — 300 000 MAD"
+}
