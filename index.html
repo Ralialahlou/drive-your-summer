@@ -1472,38 +1472,44 @@
   <div class="modal">
     <div class="modal-hd">
       <div class="modal-hd-text">
-        <h3>Créer mon compte</h3>
-        <p>Un compte pour suivre toutes vos participations.</p>
+        <h3 data-i18n="reg.title">Créer mon compte</h3>
+        <p data-i18n="reg.sub">Un compte pour suivre toutes vos participations.</p>
       </div>
       <button class="btn-close" onclick="closeOverlay('overlay-register')">✕</button>
     </div>
     <form id="form-register" onsubmit="submitRegister(event)">
       <div class="form-row">
         <div class="form-g">
-          <label for="reg-first">Prénom</label>
+          <label for="reg-first" data-i18n="reg.first">Prénom</label>
           <input class="form-input" id="reg-first" type="text" placeholder="Karim" required autocomplete="given-name">
         </div>
         <div class="form-g">
-          <label for="reg-last">Nom</label>
+          <label for="reg-last" data-i18n="reg.last">Nom</label>
           <input class="form-input" id="reg-last" type="text" placeholder="Benali" required autocomplete="family-name">
         </div>
       </div>
       <div class="form-g">
-        <label for="reg-phone">Numéro de téléphone</label>
+        <label for="reg-phone" data-i18n="reg.phone">Numéro de téléphone</label>
         <input class="form-input" id="reg-phone" type="tel" placeholder="+212 6 XX XX XX XX" required autocomplete="tel">
       </div>
       <div class="form-g">
-        <label for="reg-email">Email <span style="font-size:.65rem;text-transform:none;letter-spacing:0;color:rgba(44,74,90,.35)">(optionnel)</span></label>
+        <label for="reg-email">
+          <span class="fr-inline">Email <span style="font-size:.65rem;text-transform:none;letter-spacing:0;color:rgba(44,74,90,.35)">(optionnel)</span></span>
+          <span class="ar-inline">البريد الإلكتروني <span style="font-size:.65rem;text-transform:none;letter-spacing:0;color:rgba(44,74,90,.35)">(اختياري)</span></span>
+        </label>
         <input class="form-input" id="reg-email" type="email" placeholder="vous@exemple.ma" autocomplete="email">
       </div>
       <div class="form-g">
-        <label for="reg-pin">Code secret <span style="font-size:.65rem;text-transform:none;letter-spacing:0;color:rgba(44,74,90,.35)">(4 chiffres — pour vous reconnecter)</span></label>
+        <label for="reg-pin">
+          <span class="fr-inline">Code secret <span style="font-size:.65rem;text-transform:none;letter-spacing:0;color:rgba(44,74,90,.35)">(4 chiffres — pour vous reconnecter)</span></span>
+          <span class="ar-inline">الرمز السري <span style="font-size:.65rem;text-transform:none;letter-spacing:0;color:rgba(44,74,90,.35)">(4 أرقام — للدخول لاحقاً)</span></span>
+        </label>
         <input class="form-input" id="reg-pin" type="password" inputmode="numeric" maxlength="4" placeholder="••••" required autocomplete="new-password">
       </div>
-      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px">
+      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px" data-i18n="reg.submit">
         Créer mon compte &amp; continuer →
       </button>
-      <p style="font-size:.7rem;color:var(--text-muted);text-align:center;margin-top:12px">Vos données sont sécurisées et ne seront utilisées que dans le cadre de ce jeu-concours.</p>
+      <p data-i18n="reg.privacy" style="font-size:.7rem;color:var(--text-muted);text-align:center;margin-top:12px">Vos données sont sécurisées et ne seront utilisées que dans le cadre de ce jeu-concours.</p>
     </form>
   </div>
 </div>
@@ -1522,53 +1528,54 @@
     <div id="login-form-wrap">
       <form id="form-login" onsubmit="submitLogin(event)">
         <div class="form-g">
-          <label for="login-phone">Numéro de téléphone</label>
+          <label for="login-phone" data-i18n="login.phone">Numéro de téléphone</label>
           <input class="form-input" id="login-phone" type="tel" placeholder="+212 6 XX XX XX XX" required autocomplete="tel">
         </div>
         <div class="form-g">
-          <label for="login-pin">Code secret (4 chiffres)</label>
+          <label for="login-pin" data-i18n="login.pin.lbl">Code secret (4 chiffres)</label>
           <input class="form-input" id="login-pin" type="password" inputmode="numeric" maxlength="4" placeholder="••••" required autocomplete="current-password">
         </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px">Se connecter →</button>
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px" data-i18n="login.submit">Se connecter →</button>
         <p style="text-align:center;margin-top:14px;font-size:.82rem">
-          <a href="#" class="link-muted" onclick="showForgotPin(event)">Code oublié ? Recevoir un nouveau code</a>
+          <a href="#" class="link-muted" onclick="showForgotPin(event)" data-i18n="login.forgot">Code oublié ? Recevoir un nouveau code</a>
         </p>
         <hr style="margin:16px 0;border:none;border-top:1px solid var(--border)">
-        <p style="text-align:center;font-size:.82rem;color:var(--text-muted)">Pas encore de compte ?
-          <a href="#" class="link-muted" onclick="switchToRegister(event)">S'inscrire</a>
+        <p style="text-align:center;font-size:.82rem;color:var(--text-muted)">
+          <span data-i18n="login.noaccount">Pas encore de compte ?</span>
+          <a href="#" class="link-muted" onclick="switchToRegister(event)" data-i18n="login.signup"> S'inscrire</a>
         </p>
       </form>
     </div>
     <!-- Forgot PIN panels -->
     <div id="forgot-pin-wrap" style="display:none">
       <div id="forgot-step-1">
-        <p style="font-size:.88rem;color:var(--text-mid);margin-bottom:20px">Entrez votre numéro de téléphone pour recevoir un nouveau code.</p>
+        <p data-i18n="forgot.intro" style="font-size:.88rem;color:var(--text-mid);margin-bottom:20px">Entrez votre numéro de téléphone pour recevoir un nouveau code.</p>
         <div class="form-g">
-          <label for="forgot-phone">Numéro de téléphone</label>
+          <label for="forgot-phone" data-i18n="login.phone">Numéro de téléphone</label>
           <input class="form-input" id="forgot-phone" type="tel" placeholder="+212 6 XX XX XX XX">
         </div>
-        <button class="btn btn-primary" style="width:100%;margin-top:6px" onclick="sendResetCode()">Envoyer le code</button>
+        <button class="btn btn-primary" style="width:100%;margin-top:6px" onclick="sendResetCode()" data-i18n="forgot.send">Envoyer le code</button>
         <p style="text-align:center;margin-top:14px;font-size:.82rem">
-          <a href="#" class="link-muted" onclick="showLoginForm(event)">← Retour</a>
+          <a href="#" class="link-muted" onclick="showLoginForm(event)" data-i18n="forgot.back">← Retour</a>
         </p>
       </div>
       <div id="forgot-step-2" style="display:none">
         <div class="code-sent-box">
-          <p class="code-sent-label">Votre code de vérification</p>
+          <p class="code-sent-label" data-i18n="forgot.sent.lbl">Votre code de vérification</p>
           <p class="code-sent-value" id="code-sent-value">——</p>
-          <p class="code-sent-note">En production, ce code serait envoyé par SMS ou email au contact enregistré.</p>
+          <p class="code-sent-note" data-i18n="forgot.sent.note">En production, ce code serait envoyé par SMS ou email au contact enregistré.</p>
         </div>
         <div class="form-g" style="margin-top:18px">
-          <label for="reset-code-input">Entrez le code</label>
+          <label for="reset-code-input" data-i18n="forgot.code.lbl">Entrez le code</label>
           <input class="form-input" id="reset-code-input" type="tel" inputmode="numeric" maxlength="6" placeholder="––––––">
         </div>
         <div class="form-g">
-          <label for="reset-new-pin">Nouveau code secret (4 chiffres)</label>
+          <label for="reset-new-pin" data-i18n="forgot.pin.lbl">Nouveau code secret (4 chiffres)</label>
           <input class="form-input" id="reset-new-pin" type="password" inputmode="numeric" maxlength="4" placeholder="••••">
         </div>
-        <button class="btn btn-primary" style="width:100%;margin-top:6px" onclick="confirmResetPin()">Réinitialiser mon code</button>
+        <button class="btn btn-primary" style="width:100%;margin-top:6px" onclick="confirmResetPin()" data-i18n="forgot.submit">Réinitialiser mon code</button>
         <p style="text-align:center;margin-top:14px;font-size:.82rem">
-          <a href="#" class="link-muted" onclick="showLoginForm(event)">← Retour</a>
+          <a href="#" class="link-muted" onclick="showLoginForm(event)" data-i18n="forgot.back">← Retour</a>
         </p>
       </div>
     </div>
@@ -1688,6 +1695,33 @@
       'upload.ok.h':   'Ticket enregistré !',
       'upload.ok.p':   'Votre ticket est enregistré. Continuez à soumettre pour monter dans le classement et intégrer le Top 20 !',
       'upload.another':'Ajouter un autre ticket',
+      'reg.title':     'Créer mon compte',
+      'reg.sub':       'Un compte pour suivre toutes vos participations.',
+      'reg.first':     'Prénom',
+      'reg.last':      'Nom',
+      'reg.phone':     'Numéro de téléphone',
+      'reg.email':     'Email',
+      'reg.pin.lbl':   'Code secret',
+      'reg.submit':    'Créer mon compte & continuer →',
+      'reg.privacy':   'Vos données sont sécurisées et ne seront utilisées que dans le cadre de ce jeu-concours.',
+      'login.title':   'Se connecter',
+      'login.sub':     'Accédez à votre espace de participation.',
+      'login.phone':   'Numéro de téléphone',
+      'login.pin.lbl': 'Code secret (4 chiffres)',
+      'login.submit':  'Se connecter →',
+      'login.forgot':  'Code oublié ? Recevoir un nouveau code',
+      'login.noaccount':'Pas encore de compte ?',
+      'login.signup':  'S\'inscrire',
+      'forgot.title':  'Code oublié',
+      'forgot.sub':    'Réinitialisez votre code secret.',
+      'forgot.intro':  'Entrez votre numéro de téléphone pour recevoir un nouveau code.',
+      'forgot.send':   'Envoyer le code',
+      'forgot.back':   '← Retour',
+      'forgot.sent.lbl': 'Votre code de vérification',
+      'forgot.sent.note':'En production, ce code serait envoyé par SMS ou email au contact enregistré.',
+      'forgot.code.lbl': 'Entrez le code',
+      'forgot.pin.lbl':  'Nouveau code secret (4 chiffres)',
+      'forgot.submit': 'Réinitialiser mon code',
     },
     ar: {
       'meta.title':    'درايف يور صمر – اربح سيارة سوييست S05 من موروكو مول',
@@ -1730,6 +1764,33 @@
       'upload.ok.h':   'تم تسجيل الفاتورة!',
       'upload.ok.p':   'تم تسجيل فاتورتك. واصل التقديم للتسلق في الترتيب والدخول في أفضل 20!',
       'upload.another':'إضافة فاتورة أخرى',
+      'reg.title':     'إنشاء حسابي',
+      'reg.sub':       'حساب لمتابعة جميع مشاركاتك.',
+      'reg.first':     'الاسم الأول',
+      'reg.last':      'اسم العائلة',
+      'reg.phone':     'رقم الهاتف',
+      'reg.email':     'البريد الإلكتروني',
+      'reg.pin.lbl':   'الرمز السري',
+      'reg.submit':    'إنشاء حسابي والمتابعة ←',
+      'reg.privacy':   'بياناتك آمنة ولن تُستخدم إلا في إطار هذه المسابقة.',
+      'login.title':   'تسجيل الدخول',
+      'login.sub':     'ادخل إلى فضاء مشاركتك.',
+      'login.phone':   'رقم الهاتف',
+      'login.pin.lbl': 'الرمز السري (4 أرقام)',
+      'login.submit':  '← تسجيل الدخول',
+      'login.forgot':  'نسيت الرمز؟ استقبل رمزاً جديداً',
+      'login.noaccount':'ليس لديك حساب؟',
+      'login.signup':  'التسجيل',
+      'forgot.title':  'نسيت الرمز',
+      'forgot.sub':    'أعد تعيين رمزك السري.',
+      'forgot.intro':  'أدخل رقم هاتفك لاستقبال رمز جديد.',
+      'forgot.send':   'إرسال الرمز',
+      'forgot.back':   'رجوع →',
+      'forgot.sent.lbl': 'رمز التحقق الخاص بك',
+      'forgot.sent.note':'في الإصدار النهائي، سيُرسَل هذا الرمز عبر SMS أو البريد الإلكتروني.',
+      'forgot.code.lbl': 'أدخل الرمز',
+      'forgot.pin.lbl':  'رمز سري جديد (4 أرقام)',
+      'forgot.submit': 'إعادة تعيين رمزي',
     },
   };
 
@@ -2036,12 +2097,12 @@
     const email = document.getElementById('reg-email').value.trim();
     const pin   = document.getElementById('reg-pin').value.trim();
     if (!first || !last || !phone) return;
-    if (!pin || pin.length < 4) { showToast('Veuillez définir un code secret à 4 chiffres.', 'or'); return; }
+    if (!pin || pin.length < 4) { showToast(currentLang==='ar' ? 'الرجاء تحديد رمز سري من 4 أرقام.' : 'Veuillez définir un code secret à 4 chiffres.', 'or'); return; }
     state.user = { firstName:first, lastName:last, phone, email, pin, createdAt:Date.now() };
     saveState();
     closeOverlay('overlay-register');
     updateNavActions();
-    showToast(`👋 Bienvenue, ${first} !`, 'or');
+    showToast(currentLang==='ar' ? `👋 مرحباً، ${first}!` : `👋 Bienvenue, ${first} !`, 'or');
     setTimeout(openUpload, 400);
   }
 
@@ -2052,16 +2113,16 @@
     const pin   = document.getElementById('login-pin').value.trim();
     const saved = JSON.parse(localStorage.getItem(LS_USER));
     if (!saved || saved.phone.replace(/\s/g,'') !== phone.replace(/\s/g,'')) {
-      showToast('Numéro introuvable.', 'or'); return;
+      showToast(currentLang==='ar' ? 'الرقم غير موجود.' : 'Numéro introuvable.', 'or'); return;
     }
     if (saved.pin !== pin) {
-      showToast('Code incorrect.', 'or'); return;
+      showToast(currentLang==='ar' ? 'الرمز غير صحيح.' : 'Code incorrect.', 'or'); return;
     }
     state.user = saved;
     localStorage.setItem(LS_SESSION, '1');
     closeOverlay('overlay-login');
     updateNavActions();
-    showToast(`👋 Bon retour, ${state.user.firstName} !`, 'or');
+    showToast(currentLang==='ar' ? `👋 أهلاً بعودتك، ${state.user.firstName}!` : `👋 Bon retour, ${state.user.firstName} !`, 'or');
     if (state.pendingAction === 'upload') { state.pendingAction = null; setTimeout(openUpload, 400); }
   }
 
@@ -2071,16 +2132,16 @@
     document.getElementById('forgot-pin-wrap').style.display = 'block';
     document.getElementById('forgot-step-1').style.display = 'block';
     document.getElementById('forgot-step-2').style.display = 'none';
-    document.getElementById('login-modal-title').textContent = 'Code oublié';
-    document.getElementById('login-modal-sub').textContent = 'Réinitialisez votre code secret.';
+    document.getElementById('login-modal-title').textContent = T[currentLang]?.['forgot.title'] || 'Code oublié';
+    document.getElementById('login-modal-sub').textContent   = T[currentLang]?.['forgot.sub']   || 'Réinitialisez votre code secret.';
   }
 
   function showLoginForm(e) {
     if (e) e.preventDefault();
     document.getElementById('login-form-wrap').style.display = 'block';
     document.getElementById('forgot-pin-wrap').style.display = 'none';
-    document.getElementById('login-modal-title').textContent = 'Se connecter';
-    document.getElementById('login-modal-sub').textContent = 'Accédez à votre espace de participation.';
+    document.getElementById('login-modal-title').textContent = T[currentLang]?.['login.title'] || 'Se connecter';
+    document.getElementById('login-modal-sub').textContent   = T[currentLang]?.['login.sub']   || 'Accédez à votre espace de participation.';
   }
 
   function switchToRegister(e) {
@@ -2093,7 +2154,7 @@
     const phone = document.getElementById('forgot-phone').value.trim();
     const saved = JSON.parse(localStorage.getItem(LS_USER));
     if (!saved || saved.phone.replace(/\s/g,'') !== phone.replace(/\s/g,'')) {
-      showToast('Numéro introuvable.', 'or'); return;
+      showToast(currentLang==='ar' ? 'الرقم غير موجود.' : 'Numéro introuvable.', 'or'); return;
     }
     const digits = '0123456789';
     let code = '';
@@ -2111,19 +2172,19 @@
     let resetData;
     try { resetData = JSON.parse(localStorage.getItem(LS_RESET)); } catch(e) {}
     if (!resetData || resetData.code !== enteredCode) {
-      showToast('Code de vérification incorrect.', 'or'); return;
+      showToast(currentLang==='ar' ? 'رمز التحقق غير صحيح.' : 'Code de vérification incorrect.', 'or'); return;
     }
     if (Date.now() > resetData.expires) {
-      showToast('Code expiré. Veuillez recommencer.', 'or'); return;
+      showToast(currentLang==='ar' ? 'انتهت صلاحية الرمز. حاول مجدداً.' : 'Code expiré. Veuillez recommencer.', 'or'); return;
     }
     if (!newPin || newPin.length < 4) {
-      showToast('Code secret à 4 chiffres requis.', 'or'); return;
+      showToast(currentLang==='ar' ? 'الرمز السري يجب أن يتكون من 4 أرقام.' : 'Code secret à 4 chiffres requis.', 'or'); return;
     }
     const saved = JSON.parse(localStorage.getItem(LS_USER));
     saved.pin = newPin;
     localStorage.setItem(LS_USER, JSON.stringify(saved));
     localStorage.removeItem(LS_RESET);
-    showToast('Code réinitialisé ! Connectez-vous maintenant.', 'success');
+    showToast(currentLang==='ar' ? 'تم إعادة تعيين الرمز! سجّل دخولك الآن.' : 'Code réinitialisé ! Connectez-vous maintenant.', 'success');
     showLoginForm(null);
   }
 
