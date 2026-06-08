@@ -69,7 +69,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
   <style>
     /* ── OFFICIAL BRAND PALETTE (DA_summersales_MM.pdf) ─────
        Sable      #D4C4A8  — fond, arrière-plan
@@ -125,8 +125,8 @@
       --border-bleu:  rgba(44,74,90,0.18);
       --border-turq:  rgba(93,173,168,0.3);
 
-      --f-serif: 'Cormorant Garamond', Georgia, serif;
-      --f-sans:  'DM Sans', system-ui, -apple-system, sans-serif;
+      --f-serif: 'Montserrat', system-ui, sans-serif;
+      --f-sans:  'Montserrat', system-ui, sans-serif;
       --r:    16px;
       --r-sm: 10px;
       --ease: cubic-bezier(0.4,0,0.2,1);
@@ -152,10 +152,10 @@
     ::-webkit-scrollbar-thumb { background: var(--sable); border-radius: 3px; }
 
     /* ── TYPOGRAPHY ────────────────────────────────────────── */
-    h1,h2,h3,h4 { font-family: var(--f-serif); line-height: 1.1; font-weight: 400; }
-    h1 { font-size: clamp(2.8rem,8.5vw,5.8rem); }
-    h2 { font-size: clamp(1.85rem,4.8vw,3.1rem); }
-    h3 { font-size: clamp(1.15rem,2.8vw,1.7rem); }
+    h1,h2,h3,h4 { font-family: var(--f-serif); line-height: 1.1; font-weight: 200; letter-spacing: -.01em; }
+    h1 { font-size: clamp(2.6rem,8vw,5.4rem); font-weight: 200; letter-spacing: -.02em; }
+    h2 { font-size: clamp(1.7rem,4.5vw,2.8rem); font-weight: 600; letter-spacing: -.01em; }
+    h3 { font-size: clamp(1.05rem,2.5vw,1.55rem); font-weight: 500; }
     .f-i    { font-style: italic; }
     .f-or   { color: var(--or); }
     .f-bleu { color: var(--bleu); }
@@ -273,26 +273,23 @@
       padding: 14px 20px;
       border-bottom: 1px solid rgba(201,169,110,.28);
     }
-    .nav-brand { display: flex; flex-direction: column; gap: 3px; }
-    /* Morocco Mall primary row */
-    .nav-mm {
-      display: flex; align-items: center; gap: 7px; line-height: 1;
-    }
-    .nav-mm-icon { font-size: .9rem; color: var(--or); flex-shrink: 0; }
-    .nav-mm-name {
-      font-family: var(--f-sans);
-      font-weight: 800; font-size: .95rem;
-      color: #fff; letter-spacing: .1em;
-      text-transform: uppercase; line-height: 1;
+    .nav-brand { display: flex; flex-direction: column; gap: 4px; }
+    /* Morocco Mall logo row */
+    .nav-mm { display: flex; align-items: center; line-height: 1; }
+    .nav-mm-logo {
+      height: 28px; width: auto; display: block;
+      mix-blend-mode: screen;
+      image-rendering: -webkit-optimize-contrast;
     }
     /* Campaign subtitle */
     .nav-campaign {
-      font-family: var(--f-serif);
-      font-style: italic; font-size: .78rem;
+      font-family: var(--f-sans);
+      font-style: italic; font-weight: 300;
+      font-size: .72rem; letter-spacing: .12em;
       color: var(--or); line-height: 1;
-      padding-left: 22px;
+      padding-left: 4px;
     }
-    [dir="rtl"] .nav-campaign { padding-left: 0; padding-right: 22px; }
+    [dir="rtl"] .nav-campaign { padding-left: 0; padding-right: 4px; }
     /* kept for JS-generated content that still uses nav-brand-sub */
     .nav-brand-sub {
       font-size: .58rem; letter-spacing: .22em; text-transform: uppercase;
@@ -351,29 +348,30 @@
     }
     .hero-eyebrow { margin-bottom: 22px; }
     .mm-organizer {
-      display: flex; align-items: center; gap: 9px;
+      display: flex; align-items: center; gap: 12px;
       margin-bottom: 14px;
     }
-    .mm-organizer-name {
-      font-family: var(--f-sans);
-      font-weight: 800; font-size: .72rem;
-      letter-spacing: .22em; text-transform: uppercase;
-      color: #fff;
+    .mm-organizer-logo {
+      height: 36px; width: auto; display: block;
+      mix-blend-mode: screen;
+      image-rendering: -webkit-optimize-contrast;
     }
     .mm-organizer-sep { flex: none; width: 22px; height: 1.5px; background: var(--or); opacity: .7; }
     .mm-organizer-tag {
-      font-size: .62rem; font-weight: 700; letter-spacing: .18em;
+      font-size: .62rem; font-weight: 600; letter-spacing: .2em;
       text-transform: uppercase; color: var(--or);
     }
     .hero-title   { color: #fff; margin-bottom: 14px; }
     .hero-title em { font-style: italic; color: var(--or); }
     .hero-sub {
-      font-family: var(--f-serif);
+      font-family: var(--f-sans);
       font-style: italic;
-      font-size: clamp(.95rem,2.3vw,1.35rem);
+      font-weight: 300;
+      font-size: clamp(.95rem,2.1vw,1.2rem);
       color: var(--on-dark-mid);
       margin-bottom: 36px;
       max-width: 500px;
+      letter-spacing: .02em;
     }
     .hero-actions {
       display: flex; flex-wrap: wrap;
@@ -388,9 +386,9 @@
     .countdown { display: flex; align-items: flex-start; }
     .cd-item   { display: flex; flex-direction: column; align-items: center; min-width: 60px; }
     .cd-num {
-      font-family: var(--f-serif);
+      font-family: var(--f-sans);
       font-size: clamp(1.9rem,4.5vw,2.8rem);
-      font-weight: 600;
+      font-weight: 700;
       color: var(--or);
       line-height: 1; letter-spacing: -.02em;
     }
@@ -450,9 +448,9 @@
     }
     .rule-card:hover::after { transform: scaleX(1); }
     .rule-num {
-      font-family: var(--f-serif); font-style: italic;
-      font-size: 4.5rem; color: var(--corail);
-      opacity: .18; line-height: 1; margin-bottom: 14px;
+      font-family: var(--f-sans); font-style: italic; font-weight: 800;
+      font-size: 4rem; color: var(--corail);
+      opacity: .15; line-height: 1; margin-bottom: 14px;
     }
     .rule-icon {
       width: 52px; height: 52px;
@@ -483,15 +481,15 @@
       .car-visual { flex: 1.2; }
     }
     .car-name-big {
-      font-family: var(--f-serif); font-style: italic;
-      font-size: clamp(1.5rem,3.8vw,2.4rem);
-      color: var(--or); margin-bottom: 16px;
+      font-family: var(--f-sans); font-weight: 300; font-style: italic;
+      font-size: clamp(1.4rem,3.5vw,2.2rem);
+      color: var(--or); margin-bottom: 16px; letter-spacing: .02em;
     }
     .car-info > p { color: var(--text-mid); font-size: .88rem; line-height: 1.85; margin-bottom: 28px; }
     .car-info strong { color: var(--corail); }
     .car-specs { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 32px; }
     .spec-item { display: flex; flex-direction: column; }
-    .spec-val  { font-family: var(--f-serif); font-size: 1.55rem; color: var(--or); line-height: 1; letter-spacing: -.02em; }
+    .spec-val  { font-family: var(--f-sans); font-size: 1.4rem; font-weight: 700; color: var(--or); line-height: 1; letter-spacing: -.02em; }
     .spec-lbl  { font-size: .67rem; text-transform: uppercase; letter-spacing: .12em; color: var(--text-muted); margin-top: 3px; }
 
     /* Carousel */
@@ -580,9 +578,9 @@
       position: relative; z-index: 1;
     }
     .footer-brand {
-      font-family: var(--f-serif); font-style: italic;
-      font-size: 1.65rem; color: var(--sable-pale);
-      letter-spacing: .01em;
+      font-family: var(--f-sans); font-style: italic; font-weight: 300;
+      font-size: 1.45rem; color: var(--sable-pale);
+      letter-spacing: .04em;
     }
     .footer-brand span { color: var(--or); }
     .footer-divider {
@@ -614,7 +612,7 @@
     }
     .overlay.open .modal { transform: translateY(0) scale(1); }
     .modal-hd { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 26px; }
-    .modal-hd-text h3 { font-family: var(--f-serif); font-size: 1.55rem; color: var(--bleu); }
+    .modal-hd-text h3 { font-family: var(--f-sans); font-size: 1.35rem; font-weight: 600; color: var(--bleu); }
     .modal-hd-text p  { font-size: .8rem; color: var(--text-muted); margin-top: 4px; }
     .btn-close {
       width: 34px; height: 34px; border-radius: 50%;
@@ -666,7 +664,7 @@
       position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%;
     }
     .upload-icon { margin-bottom: 10px; display: flex; justify-content: center; }
-    .upload-zone h4 { font-family: var(--f-serif); font-size: 1.05rem; color: var(--bleu); margin-bottom: 5px; }
+    .upload-zone h4 { font-family: var(--f-sans); font-size: .95rem; font-weight: 600; color: var(--bleu); margin-bottom: 5px; }
     .upload-zone p  { font-size: .78rem; color: var(--text-muted); }
     .upload-preview {
       width: 100%; max-height: 200px; object-fit: contain;
@@ -684,7 +682,7 @@
     }
     .success-screen.show { display: flex; }
     .success-icon { font-size: 3rem; margin-bottom: 4px; }
-    .success-screen h3 { font-family: var(--f-serif); font-size: 1.5rem; color: var(--text); }
+    .success-screen h3 { font-family: var(--f-sans); font-size: 1.3rem; font-weight: 600; color: var(--text); }
     .success-screen p  { font-size: .85rem; color: var(--text-muted); max-width: 300px; }
 
     /* ── DASHBOARD ─────────────────────────────────────────── */
@@ -734,9 +732,9 @@
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
     }
-    .ring-total { font-family: var(--f-serif); font-size: 1.5rem; color: var(--or); line-height: 1; }
+    .ring-total { font-family: var(--f-sans); font-size: 1.4rem; font-weight: 700; color: var(--or); line-height: 1; }
     .ring-mad   { font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; color: var(--text-muted); margin-top: 3px; }
-    .ring-badge { font-family: var(--f-serif); font-style: italic; font-size: 1.05rem; color: var(--text); }
+    .ring-badge { font-family: var(--f-sans); font-style: italic; font-weight: 400; font-size: .95rem; color: var(--text); }
     .ring-badge-sub { font-size: .72rem; color: var(--text-muted); }
 
     /* Level list */
@@ -768,7 +766,7 @@
     .receipt-thumb { width: 54px; height: 54px; object-fit: cover; border-radius: 8px; background: var(--sable-light); flex-shrink: 0; }
     .receipt-info  { flex: 1; min-width: 0; }
     .receipt-date  { font-size: .68rem; color: var(--text-muted); }
-    .receipt-amount{ font-family: var(--f-serif); font-size: 1.1rem; color: var(--text); }
+    .receipt-amount{ font-family: var(--f-sans); font-size: 1rem; font-weight: 600; color: var(--text); }
     .receipt-badge {
       font-size: .62rem; font-weight: 600;
       padding: 3px 10px; border-radius: 100px;
@@ -1195,8 +1193,7 @@
 <nav id="nav">
   <button class="nav-brand" onclick="showPage('landing')" style="cursor:pointer;background:none;border:none;text-align:left;">
     <span class="nav-mm">
-      <span class="nav-mm-icon">◆</span>
-      <span class="nav-mm-name">Morocco Mall</span>
+      <img src="mm-logo.png" alt="Morocco Mall" class="nav-mm-logo">
     </span>
     <span class="nav-campaign">Drive Your Summer</span>
   </button>
@@ -1229,8 +1226,7 @@
     <div class="hero-content container">
       <div class="hero-spacer"></div>
       <div class="mm-organizer fade-up">
-        <span class="nav-mm-icon" style="font-size:.75rem">◆</span>
-        <span class="mm-organizer-name">Morocco Mall</span>
+        <img src="mm-logo.png" alt="Morocco Mall" class="mm-organizer-logo">
         <span class="mm-organizer-sep"></span>
         <span class="mm-organizer-tag fr-inline">Drive Your Summer</span>
         <span class="mm-organizer-tag ar-inline">درايف يور صمر</span>
