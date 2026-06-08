@@ -278,8 +278,7 @@
     .nav-mm { display: flex; align-items: center; line-height: 1; }
     .nav-mm-logo {
       height: 28px; width: auto; display: block;
-      filter: contrast(8) brightness(1.1);
-      mix-blend-mode: screen;
+      filter: contrast(100) brightness(1.05);
     }
     /* Campaign subtitle */
     .nav-campaign {
@@ -353,8 +352,7 @@
     }
     .mm-organizer-logo {
       height: 36px; width: auto; display: block;
-      filter: contrast(8) brightness(1.1);
-      mix-blend-mode: screen;
+      filter: contrast(100) brightness(1.05);
     }
     .mm-organizer-sep { flex: none; width: 22px; height: 1.5px; background: var(--or); opacity: .7; }
     .mm-organizer-tag {
@@ -576,6 +574,10 @@
       display: flex; flex-direction: column;
       align-items: center; gap: 20px; text-align: center;
       position: relative; z-index: 1;
+    }
+    .footer-mm-logo {
+      height: 40px; width: auto; display: block; margin: 0 auto;
+      filter: contrast(100) sepia(0.6) saturate(4) hue-rotate(-8deg) brightness(1.15);
     }
     .footer-brand {
       font-family: var(--f-sans); font-style: italic; font-weight: 300;
@@ -1426,6 +1428,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
+      <img src="mm-logo.png" alt="Morocco Mall" class="footer-mm-logo">
       <div class="footer-brand">Drive Your <span>Summer</span></div>
       <div class="footer-divider"></div>
       <p class="footer-copy fr-txt">Summer Sales Morocco Mall × Soueast S05 — Été 2026</p>
