@@ -273,15 +273,27 @@
       padding: 14px 20px;
       border-bottom: 1px solid rgba(201,169,110,.28);
     }
-    .nav-brand { display: flex; flex-direction: column; gap: 2px; }
-    .nav-brand-title {
-      font-family: var(--f-serif);
-      font-style: italic;
-      font-size: 1.25rem;
-      color: #fff;
-      line-height: 1;
+    .nav-brand { display: flex; flex-direction: column; gap: 3px; }
+    /* Morocco Mall primary row */
+    .nav-mm {
+      display: flex; align-items: center; gap: 7px; line-height: 1;
     }
-    .nav-brand-title span { color: var(--or); }
+    .nav-mm-icon { font-size: .9rem; color: var(--or); flex-shrink: 0; }
+    .nav-mm-name {
+      font-family: var(--f-sans);
+      font-weight: 800; font-size: .95rem;
+      color: #fff; letter-spacing: .1em;
+      text-transform: uppercase; line-height: 1;
+    }
+    /* Campaign subtitle */
+    .nav-campaign {
+      font-family: var(--f-serif);
+      font-style: italic; font-size: .78rem;
+      color: var(--or); line-height: 1;
+      padding-left: 22px;
+    }
+    [dir="rtl"] .nav-campaign { padding-left: 0; padding-right: 22px; }
+    /* kept for JS-generated content that still uses nav-brand-sub */
     .nav-brand-sub {
       font-size: .58rem; letter-spacing: .22em; text-transform: uppercase;
       color: var(--on-dark-muted); line-height: 1;
@@ -338,6 +350,21 @@
       min-height: max(130px, 17vh);
     }
     .hero-eyebrow { margin-bottom: 22px; }
+    .mm-organizer {
+      display: flex; align-items: center; gap: 9px;
+      margin-bottom: 14px;
+    }
+    .mm-organizer-name {
+      font-family: var(--f-sans);
+      font-weight: 800; font-size: .72rem;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: #fff;
+    }
+    .mm-organizer-sep { flex: none; width: 22px; height: 1.5px; background: var(--or); opacity: .7; }
+    .mm-organizer-tag {
+      font-size: .62rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--or);
+    }
     .hero-title   { color: #fff; margin-bottom: 14px; }
     .hero-title em { font-style: italic; color: var(--or); }
     .hero-sub {
@@ -1108,15 +1135,18 @@
 
 <!-- Summer Sales announcement banner -->
 <div id="summer-banner">
-  <span class="fr-inline">✦ Summer Sales Morocco Mall — Soldes d'été 2026 ✦</span>
-  <span class="ar-inline">✦ سولد الصيف — موروكو مول 2026 ✦</span>
+  <span class="fr-inline">◆ Morocco Mall — Drive Your Summer · Jeu-concours · 6 au 27 juillet 2026 ◆</span>
+  <span class="ar-inline">◆ موروكو مول — درايف يور صمر · مسابقة · 6 – 27 يوليوز 2026 ◆</span>
 </div>
 
 <!-- ████ NAV ████ -->
 <nav id="nav">
   <button class="nav-brand" onclick="showPage('landing')" style="cursor:pointer;background:none;border:none;text-align:left;">
-    <span class="nav-brand-title">Drive Your <span>Summer</span></span>
-    <span class="nav-brand-sub" data-i18n="nav.sub">Morocco Mall × Soueast S05</span>
+    <span class="nav-mm">
+      <span class="nav-mm-icon">◆</span>
+      <span class="nav-mm-name">Morocco Mall</span>
+    </span>
+    <span class="nav-campaign">Drive Your Summer</span>
   </button>
   <div class="nav-actions" id="nav-actions">
     <div class="lang-toggle" style="margin-right:8px">
@@ -1138,12 +1168,15 @@
     </div>
     <div class="hero-content container">
       <div class="hero-spacer"></div>
+      <div class="mm-organizer fade-up">
+        <span class="nav-mm-icon" style="font-size:.75rem">◆</span>
+        <span class="mm-organizer-name">Morocco Mall</span>
+        <span class="mm-organizer-sep"></span>
+        <span class="mm-organizer-tag fr-inline">Drive Your Summer</span>
+        <span class="mm-organizer-tag ar-inline">درايف يور صمر</span>
+      </div>
       <div class="hero-eyebrow">
         <span class="tag"><span class="tag-dot"></span><span data-i18n="hero.tag">6 juillet – 27 juillet 2026</span></span>
-        <span class="tag" style="background:rgba(224,120,80,.15);border-color:rgba(224,120,80,.3);color:var(--corail);margin-left:8px">
-          <span class="fr-inline">Summer Sales Morocco Mall</span>
-          <span class="ar-inline">سولد الصيف — موروكو مول</span>
-        </span>
       </div>
       <h1 class="hero-title fade-up">
         Drive<br><em>Your Summer</em>
@@ -1405,12 +1438,6 @@
         </div>
       </div>
 
-      <!-- Levels -->
-      <div class="dash-card">
-        <p class="dash-card-title" data-i18n="dash.levels">Niveaux de participation</p>
-        <div class="level-list" id="level-list"></div>
-      </div>
-
       <!-- Top 20 info card -->
       <div class="dash-card dash-wide">
         <p class="dash-card-title" data-i18n="dash.howtowin">Comment gagner la voiture ?</p>
@@ -1493,11 +1520,8 @@
         <input class="form-input" id="reg-phone" type="tel" placeholder="+212 6 XX XX XX XX" required autocomplete="tel">
       </div>
       <div class="form-g">
-        <label for="reg-email">
-          <span class="fr-inline">Email <span style="font-size:.65rem;text-transform:none;letter-spacing:0;color:rgba(44,74,90,.35)">(optionnel)</span></span>
-          <span class="ar-inline">البريد الإلكتروني <span style="font-size:.65rem;text-transform:none;letter-spacing:0;color:rgba(44,74,90,.35)">(اختياري)</span></span>
-        </label>
-        <input class="form-input" id="reg-email" type="email" placeholder="vous@exemple.ma" autocomplete="email">
+        <label for="reg-email" data-i18n="reg.email">Email</label>
+        <input class="form-input" id="reg-email" type="email" placeholder="vous@exemple.ma" required autocomplete="email">
       </div>
       <div class="form-g">
         <label for="reg-pin">
@@ -1510,6 +1534,11 @@
         Créer mon compte &amp; continuer →
       </button>
       <p data-i18n="reg.privacy" style="font-size:.7rem;color:var(--text-muted);text-align:center;margin-top:12px">Vos données sont sécurisées et ne seront utilisées que dans le cadre de ce jeu-concours.</p>
+      <hr style="margin:16px 0;border:none;border-top:1px solid var(--border)">
+      <p style="text-align:center;font-size:.82rem;color:var(--text-muted)">
+        <span data-i18n="reg.hasaccount">Déjà un compte ?</span>
+        <a href="#" class="link-muted" onclick="switchToLogin(event)" data-i18n="reg.signin"> Se connecter</a>
+      </p>
     </form>
   </div>
 </div>
@@ -1721,7 +1750,9 @@
       'forgot.sent.note':'En production, ce code serait envoyé par SMS ou email au contact enregistré.',
       'forgot.code.lbl': 'Entrez le code',
       'forgot.pin.lbl':  'Nouveau code secret (4 chiffres)',
-      'forgot.submit': 'Réinitialiser mon code',
+      'forgot.submit':   'Réinitialiser mon code',
+      'reg.hasaccount':  'Déjà un compte ?',
+      'reg.signin':      'Se connecter',
     },
     ar: {
       'meta.title':    'درايف يور صمر – اربح سيارة سوييست S05 من موروكو مول',
@@ -1790,7 +1821,9 @@
       'forgot.sent.note':'في الإصدار النهائي، سيُرسَل هذا الرمز عبر SMS أو البريد الإلكتروني.',
       'forgot.code.lbl': 'أدخل الرمز',
       'forgot.pin.lbl':  'رمز سري جديد (4 أرقام)',
-      'forgot.submit': 'إعادة تعيين رمزي',
+      'forgot.submit':   'إعادة تعيين رمزي',
+      'reg.hasaccount':  'لديك حساب بالفعل؟',
+      'reg.signin':      'تسجيل الدخول',
     },
   };
 
@@ -2023,15 +2056,15 @@
     if (state.user) {
       openUpload();
     } else {
-      const savedUser = JSON.parse(localStorage.getItem(LS_USER));
-      if (savedUser && savedUser.pin) {
-        state.pendingAction = 'upload';
-        showLoginForm(null);
-        openOverlay('overlay-login');
-      } else {
-        openOverlay('overlay-register');
-      }
+      state.pendingAction = 'upload';
+      openOverlay('overlay-register');
     }
+  }
+
+  function switchToLogin(e) {
+    if (e) e.preventDefault();
+    closeOverlay('overlay-register');
+    setTimeout(() => { showLoginForm(null); openOverlay('overlay-login'); }, 200);
   }
 
   function openUpload() {
@@ -2192,7 +2225,6 @@
   function renderDashboard() {
     if (!state.user) { showPage('landing'); return; }
     const total  = userTotal();
-    const lvlIdx = userLevel();
     const nameEl = document.getElementById('dash-name');
     if (nameEl) nameEl.textContent = state.user.firstName;
 
@@ -2201,66 +2233,24 @@
     const totEl   = document.getElementById('ring-total');
     const badgeEl = document.getElementById('ring-badge');
     const nextEl  = document.getElementById('ring-next');
-    if (totEl) totEl.textContent = total.toLocaleString('fr-MA');
+    const isAr    = currentLang === 'ar';
+    const locale  = isAr ? 'ar-MA' : 'fr-MA';
 
-    const isAr  = currentLang === 'ar';
-    const locale = isAr ? 'ar-MA' : 'fr-MA';
-    const mad    = isAr ? 'درهم' : 'MAD';
-    const lName  = l => isAr ? l.nameAr : l.name;
+    if (totEl) totEl.textContent = total.toLocaleString(locale);
 
-    let pct = 0;
-    if (lvlIdx >= 0) {
-      const cur  = LEVELS[lvlIdx];
-      const next = LEVELS[lvlIdx + 1];
-      pct = next ? (total - cur.min) / (next.min - cur.min) : 1;
-      if (badgeEl) badgeEl.textContent = cur.emoji + ' ' + lName(cur);
-      if (nextEl)  nextEl.textContent  = next
-        ? (isAr ? `التالي: ${next.emoji} ${lName(next)} — ${next.min.toLocaleString(locale)} ${mad}` : `Prochain : ${next.name} à ${next.min.toLocaleString(locale)} MAD`)
-        : (isAr ? 'وصلت للمستوى الأقصى!' : 'Niveau maximum atteint !');
+    // Ring fill — scale to 5 000 MAD (first meaningful milestone) then to 1 000 000
+    const pct = Math.min(total / 5000, 1);
+    setTimeout(() => { if (ringEl) ringEl.style.strokeDashoffset = 452 * (1 - pct); }, 100);
+
+    // Encouraging message — no level names
+    if (total === 0) {
+      if (badgeEl) badgeEl.textContent = isAr ? '🛒 Commencez à acheter !' : '🛒 Commencez à acheter !';
+      if (nextEl)  nextEl.textContent  = isAr ? 'Chaque ticket compte pour le Top 20' : 'Chaque ticket compte pour le Top 20';
     } else {
-      pct = total / LEVELS[0].min;
-      if (badgeEl) badgeEl.textContent = isAr ? '— في الطريق…' : '— En route …';
-      if (nextEl)  nextEl.textContent  = isAr ? `التالي: ${LEVELS[0].emoji} ${LEVELS[0].nameAr} — 1.000 ${mad}` : 'Prochain : Co-Pilote à 1 000 MAD';
+      if (badgeEl) badgeEl.textContent = isAr ? `🏆 ${total.toLocaleString(locale)} درهم` : `🏆 ${total.toLocaleString(locale)} MAD`;
+      if (nextEl)  nextEl.textContent  = isAr ? 'واصل التقديم للدخول في أفضل 20!' : 'Continuez, chaque ticket vous rapproche du Top 20 !';
     }
-    setTimeout(() => { if (ringEl) ringEl.style.strokeDashoffset = 452 * (1 - Math.min(pct,1)); }, 100);
-
-    // Levels — paginated (page 2 locked until Élite = 30 000 MAD)
-    const eliteReached = total >= LEVELS[LEVELS_PAGE1 - 1].min;
-    if (levelPage === 1 && !eliteReached) levelPage = 0; // force back if no longer eligible
-    const listEl = document.getElementById('level-list');
-    if (listEl) {
-      const pageStart  = levelPage === 0 ? 0 : LEVELS_PAGE1;
-      const pageEnd    = levelPage === 0 ? LEVELS_PAGE1 : LEVELS.length;
-      const pageLevels = LEVELS.slice(pageStart, pageEnd);
-      const rows = pageLevels.map((l, i) => {
-        const realIdx = pageStart + i;
-        const done = total >= l.min, cur = realIdx === lvlIdx;
-        const rangeMax = l.max === Infinity ? `${mad} +` : `– ${l.max.toLocaleString(locale)} ${mad}`;
-        return `<div class="level-item ${cur?'current':''} ${done&&!cur?'done':''}">
-          <div class="level-dot"></div>
-          <div class="level-info">
-            <p class="level-name">${l.emoji} ${lName(l)}</p>
-            <p class="level-range">${l.min.toLocaleString(locale)} ${rangeMax}</p>
-          </div>
-          <span class="level-tick">${done?'✓':''}</span>
-        </div>`;
-      }).join('');
-      const lockedTitle = isAr
-        ? 'ابلغ مستوى نخبة (30.000 درهم) لفتح المستويات العليا'
-        : 'Atteignez le niveau Élite (30 000 MAD) pour débloquer les niveaux supérieurs';
-      const page2Btn = eliteReached
-        ? `<button class="level-page-btn ${levelPage===1?'active':''}" onclick="setLevelPage(1)">2</button>`
-        : `<button class="level-page-btn locked" disabled title="${lockedTitle}">🔒</button>`;
-      const pagination = `<div class="level-pages">
-        <button class="level-page-btn ${levelPage===0?'active':''}" onclick="setLevelPage(0)">1</button>
-        ${page2Btn}
-      </div>`;
-      listEl.innerHTML = rows + pagination;
-    }
-
   }
-
-  function setLevelPage(p) { levelPage = p; renderDashboard(); }
 
   /* ─── RECEIPTS ───────────────────────────────────── */
   function renderReceipts() {
