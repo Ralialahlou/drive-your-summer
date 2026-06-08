@@ -941,6 +941,61 @@
       cursor: pointer; transition: all .2s;
     }
     .btn-logout-sm:hover { color: var(--corail); border-color: var(--corail); }
+
+    /* ── Mobile profile icon button (hidden on desktop) ── */
+    .nav-mobile-btn {
+      display: none; align-items: center; justify-content: center;
+      position: relative;
+      width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(26,18,10,.5); border: 1px solid rgba(201,169,110,.45);
+      color: rgba(255,255,255,.9); cursor: pointer;
+      transition: background .2s, border-color .2s;
+    }
+    .nav-mobile-btn:hover { background: rgba(201,169,110,.18); border-color: rgba(201,169,110,.8); }
+    .nav-mobile-btn .mob-dot {
+      position: absolute; top: 3px; right: 3px;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--or); border: 1.5px solid var(--dark-warm);
+      display: none;
+    }
+    .nav-mobile-btn.is-logged .mob-dot { display: block; }
+
+    /* ── Mobile dropdown menu ── */
+    #nav-mobile-menu {
+      position: fixed; left: 0; right: 0; z-index: 490;
+      background: rgba(18,11,5,.97); backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(201,169,110,.2);
+      padding: 16px 18px 20px;
+    }
+    .mob-menu-user {
+      font-size: .82rem; font-weight: 700; color: var(--or);
+      letter-spacing: .04em; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .mob-lang {
+      display: flex; gap: 0;
+      border: 1px solid rgba(201,169,110,.45); border-radius: 100px;
+      overflow: hidden; width: fit-content;
+      background: rgba(26,18,10,.5); margin-bottom: 2px;
+    }
+    .mob-lang .lang-btn { padding: 6px 14px; font-size: .7rem; }
+    .mob-divider { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 12px 0; }
+    .mob-menu-item {
+      display: flex; align-items: center; width: 100%;
+      padding: 12px 14px; border: none; border-radius: var(--r-sm);
+      font-size: .88rem; font-weight: 500; letter-spacing: .01em;
+      background: transparent; color: rgba(255,255,255,.8);
+      cursor: pointer; transition: background .2s, color .2s;
+      margin-bottom: 4px;
+    }
+    .mob-menu-item:hover { background: rgba(255,255,255,.07); color: #fff; }
+    .mob-menu-item.primary {
+      background: var(--or); color: var(--dark-warm); font-weight: 700;
+    }
+    .mob-menu-item.primary:hover { background: #e8c46a; }
+    .mob-menu-item.danger { color: rgba(224,120,80,.85); }
+    .mob-menu-item.danger:hover { background: rgba(224,120,80,.1); color: var(--corail); }
+    [dir="rtl"] .mob-menu-item { text-align: right; }
     .btn-outline-danger {
       background: transparent; border: 1px solid rgba(224,120,80,.4);
       color: var(--corail); border-radius: var(--r);
@@ -1084,16 +1139,13 @@
       #nav .btn-sm { padding: 6px 12px; font-size: .65rem; min-height: 30px; }
       #nav .lang-btn { padding: 4px 8px; font-size: .62rem; }
 
+      /* ── Mobile: hide desktop nav actions, show profile icon ── */
+      #nav-actions { display: none !important; }
+      .nav-mobile-btn { display: flex !important; }
+
       /* ── Prevent page-level horizontal scroll ── */
       body { overflow-x: hidden; }
       #page-dashboard, #page-receipts { overflow-x: hidden; max-width: 100vw; }
-
-      /* ── Nav on dashboard/receipts: keep only lang toggle ── */
-      body[data-page="dashboard"] #nav-actions > :not(.lang-toggle),
-      body[data-page="receipts"]  #nav-actions > :not(.lang-toggle) { display: none !important; }
-      /* Remove margin-right on lang toggle when it's the only item */
-      body[data-page="dashboard"] #nav-actions .lang-toggle,
-      body[data-page="receipts"]  #nav-actions .lang-toggle { margin-right: 0 !important; }
 
       /* ── Compact dash-top on mobile ── */
       .dash-top { padding-top: 80px; padding-bottom: 20px; }
@@ -1155,7 +1207,15 @@
     </div>
     <button class="btn btn-primary btn-sm" onclick="handleUploadCTA()" data-i18n="nav.cta">Participer</button>
   </div>
+  <!-- Mobile-only profile icon -->
+  <button class="nav-mobile-btn" id="nav-mobile-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span class="mob-dot"></span>
+  </button>
 </nav>
+
+<!-- Mobile profile dropdown menu -->
+<div id="nav-mobile-menu" style="display:none"></div>
 
 <!-- ████ LANDING PAGE ████ -->
 <div id="page-landing" class="pg-enter">
@@ -1957,7 +2017,78 @@
         nav.innerHTML = langHtml + `<button class="btn btn-primary btn-sm" onclick="handleUploadCTA()">${cta}</button>`;
       }
     }
+    updateMobileMenu();
   }
+
+  /* ─── MOBILE PROFILE MENU ──────────────────────────── */
+  let mobileMenuOpen = false;
+
+  function toggleMobileMenu() {
+    mobileMenuOpen = !mobileMenuOpen;
+    const menu = document.getElementById('nav-mobile-menu');
+    const navEl = document.getElementById('nav');
+    if (mobileMenuOpen) {
+      const rect = navEl.getBoundingClientRect();
+      menu.style.top = rect.bottom + 'px';
+      updateMobileMenu();
+      menu.style.display = 'block';
+    } else {
+      menu.style.display = 'none';
+    }
+  }
+
+  function closeMobileMenu() {
+    mobileMenuOpen = false;
+    const menu = document.getElementById('nav-mobile-menu');
+    if (menu) menu.style.display = 'none';
+  }
+
+  function updateMobileMenu() {
+    const menu = document.getElementById('nav-mobile-menu');
+    const btn  = document.getElementById('nav-mobile-btn');
+    if (!menu) return;
+    const isAr = currentLang === 'ar';
+
+    if (btn) btn.classList.toggle('is-logged', !!state.user);
+
+    const langHtmlMob = `<div class="mob-lang">
+      <button class="lang-btn ${currentLang==='fr'?'active':''}" onclick="setLanguage('fr')">FR</button>
+      <button class="lang-btn ${currentLang==='ar'?'active':''}" onclick="setLanguage('ar')">عربي</button>
+    </div>`;
+
+    if (state.user) {
+      menu.innerHTML = `
+        <div class="mob-menu-user">👋 ${state.user.firstName}</div>
+        ${langHtmlMob}
+        <hr class="mob-divider">
+        <button class="mob-menu-item" onclick="showPage('dashboard');closeMobileMenu()">
+          ${isAr ? 'لوحتي' : 'Mon espace'}
+        </button>
+        <button class="mob-menu-item danger" onclick="logout();closeMobileMenu()">
+          ${isAr ? 'تسجيل الخروج' : 'Se déconnecter'}
+        </button>`;
+    } else {
+      const savedUser = JSON.parse(localStorage.getItem(LS_USER));
+      const hasPin = savedUser && savedUser.pin;
+      menu.innerHTML = `
+        ${langHtmlMob}
+        <hr class="mob-divider">
+        ${hasPin ? `<button class="mob-menu-item" onclick="showLoginForm(null);openOverlay('overlay-login');closeMobileMenu()">
+          ${isAr ? 'تسجيل الدخول' : 'Se connecter'}
+        </button>` : ''}
+        <button class="mob-menu-item primary" onclick="openOverlay('overlay-register');closeMobileMenu()">
+          ${isAr ? 'إنشاء حساب' : 'Créer un compte'}
+        </button>`;
+    }
+  }
+
+  document.addEventListener('click', (e) => {
+    if (mobileMenuOpen
+        && !e.target.closest('#nav-mobile-menu')
+        && !e.target.closest('#nav-mobile-btn')) {
+      closeMobileMenu();
+    }
+  });
 
   let stickyDismissed = sessionStorage.getItem('dys_sticky_off') === '1';
   function dismissSticky() {
@@ -1980,6 +2111,7 @@
 
   /* ─── PAGES ──────────────────────────────────────── */
   function showPage(page) {
+    closeMobileMenu();
     ['landing','dashboard','receipts'].forEach(p => {
       const el = document.getElementById('page-' + p);
       if (el) el.style.display = p === page ? 'block' : 'none';
