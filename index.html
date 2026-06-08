@@ -69,7 +69,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
   <style>
     /* ── OFFICIAL BRAND PALETTE (DA_summersales_MM.pdf) ─────
        Sable      #D4C4A8  — fond, arrière-plan
@@ -125,8 +125,8 @@
       --border-bleu:  rgba(44,74,90,0.18);
       --border-turq:  rgba(93,173,168,0.3);
 
-      --f-serif: 'Montserrat', system-ui, sans-serif;
-      --f-sans:  'Montserrat', system-ui, sans-serif;
+      --f-serif: 'Cormorant Garamond', Georgia, serif;
+      --f-sans:  'DM Sans', system-ui, -apple-system, sans-serif;
       --r:    16px;
       --r-sm: 10px;
       --ease: cubic-bezier(0.4,0,0.2,1);
@@ -152,10 +152,10 @@
     ::-webkit-scrollbar-thumb { background: var(--sable); border-radius: 3px; }
 
     /* ── TYPOGRAPHY ────────────────────────────────────────── */
-    h1,h2,h3,h4 { font-family: var(--f-serif); line-height: 1.1; font-weight: 200; letter-spacing: -.01em; }
-    h1 { font-size: clamp(2.6rem,8vw,5.4rem); font-weight: 200; letter-spacing: -.02em; }
-    h2 { font-size: clamp(1.7rem,4.5vw,2.8rem); font-weight: 600; letter-spacing: -.01em; }
-    h3 { font-size: clamp(1.05rem,2.5vw,1.55rem); font-weight: 500; }
+    h1,h2,h3,h4 { font-family: var(--f-serif); line-height: 1.1; font-weight: 400; }
+    h1 { font-size: clamp(2.8rem,8.5vw,5.8rem); }
+    h2 { font-size: clamp(1.85rem,4.8vw,3.1rem); }
+    h3 { font-size: clamp(1.15rem,2.8vw,1.7rem); }
     .f-i    { font-style: italic; }
     .f-or   { color: var(--or); }
     .f-bleu { color: var(--bleu); }
@@ -361,6 +361,14 @@
     }
     .hero-title   { color: #fff; margin-bottom: 14px; }
     .hero-title em { font-style: italic; color: var(--or); }
+    .hero-title-mm {
+      display: block;
+      font-family: var(--f-sans); font-weight: 600;
+      font-size: clamp(.7rem, 1.6vw, 1rem);
+      letter-spacing: .28em; text-transform: uppercase;
+      color: var(--or); opacity: .9;
+      margin-bottom: 6px;
+    }
     .hero-sub {
       font-family: var(--f-sans);
       font-style: italic;
@@ -1237,6 +1245,7 @@
         <span class="tag"><span class="tag-dot"></span><span data-i18n="hero.tag">6 juillet – 27 juillet 2026</span></span>
       </div>
       <h1 class="hero-title fade-up">
+        <span class="hero-title-mm">Morocco Mall</span><br>
         Drive<br><em>Your Summer</em>
       </h1>
       <p class="hero-sub fade-up" data-i18n="hero.sub">Drive into summer. Win the ultimate reward.</p>
