@@ -132,6 +132,30 @@
       --ease: cubic-bezier(0.4,0,0.2,1);
     }
 
+    /* ── MM BRAND PATTERN HELPERS ─────────────────────────── */
+    .mm-pattern-dark {
+      position: relative; overflow: hidden;
+    }
+    .mm-pattern-dark::after {
+      content: '';
+      position: absolute; inset: 0; z-index: 0;
+      background: url('mm-pattern-dark.svg') center top / 100% auto repeat-y;
+      opacity: .055;
+      pointer-events: none;
+    }
+    .mm-pattern-beige {
+      position: relative; overflow: hidden;
+    }
+    .mm-pattern-beige::after {
+      content: '';
+      position: absolute; inset: 0; z-index: 0;
+      background: url('mm-pattern-beige.svg') center top / 100% auto repeat-y;
+      opacity: .07;
+      pointer-events: none;
+    }
+    /* Ensure content inside pattern sections stays above ::after */
+    .mm-pattern-dark > *, .mm-pattern-beige > * { position: relative; z-index: 1; }
+
     /* ── RESET ─────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -277,7 +301,7 @@
     /* Morocco Mall logo row */
     .nav-mm { display: flex; align-items: center; line-height: 1; }
     .nav-mm-logo {
-      height: 28px; width: auto; display: block;
+      height: 34px; width: auto; display: block;
       filter: contrast(100) brightness(1.05);
     }
     /* Campaign subtitle */
@@ -364,10 +388,10 @@
     .hero-title-mm {
       display: block;
       font-family: var(--f-sans); font-weight: 600;
-      font-size: clamp(.7rem, 1.6vw, 1rem);
+      font-size: clamp(.8rem, 1.8vw, 1.1rem);
       letter-spacing: .28em; text-transform: uppercase;
       color: var(--or); opacity: .9;
-      margin-bottom: 6px;
+      margin-bottom: 10px;
     }
     .hero-sub {
       font-family: var(--f-sans);
@@ -584,7 +608,7 @@
       position: relative; z-index: 1;
     }
     .footer-mm-logo {
-      height: 40px; width: auto; display: block; margin: 0 auto;
+      height: 52px; width: auto; display: block; margin: 0 auto;
       filter: contrast(100) sepia(0.6) saturate(4) hue-rotate(-8deg) brightness(1.15);
     }
     .footer-brand {
@@ -624,6 +648,12 @@
     .modal-hd { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 26px; }
     .modal-hd-text h3 { font-family: var(--f-sans); font-size: 1.35rem; font-weight: 600; color: var(--bleu); }
     .modal-hd-text p  { font-size: .8rem; color: var(--text-muted); margin-top: 4px; }
+    .modal-mm-logo {
+      height: 32px; width: auto; display: block;
+      margin: 0 auto 12px;
+      filter: contrast(100);
+      opacity: 0.75;
+    }
     .btn-close {
       width: 34px; height: 34px; border-radius: 50%;
       background: var(--sable-light); border: 1px solid var(--border);
@@ -1228,7 +1258,7 @@
 <div id="page-landing" class="pg-enter">
 
   <!-- HERO -->
-  <section id="hero">
+  <section id="hero" class="mm-pattern-dark">
     <div class="hero-img-wrap">
       <div class="hero-bg" id="hero-bg"></div>
       <div class="hero-overlay"></div>
@@ -1284,7 +1314,7 @@
   </div>
 
   <!-- RULES — light bg -->
-  <section id="rules" class="section">
+  <section id="rules" class="section mm-pattern-beige">
     <div class="container">
       <div class="rules-hd fade-up">
         <p class="eyebrow fr-txt" data-i18n="rules.eyebrow">La règle du jeu</p>
@@ -1435,7 +1465,7 @@
   </section>
 
   <!-- FOOTER -->
-  <footer>
+  <footer class="mm-pattern-dark">
     <div class="footer-inner">
       <img src="mm-logo.png" alt="Morocco Mall" class="footer-mm-logo">
       <div class="footer-brand">Drive Your <span>Summer</span></div>
@@ -1566,6 +1596,7 @@
 <div class="overlay" id="overlay-register">
   <div class="modal">
     <div class="modal-hd">
+      <img src="mm-logo-black.png" alt="Morocco Mall" class="modal-mm-logo">
       <div class="modal-hd-text">
         <h3 data-i18n="reg.title">Créer mon compte</h3>
         <p data-i18n="reg.sub">Un compte pour suivre toutes vos participations.</p>
@@ -1615,6 +1646,7 @@
 <div class="overlay" id="overlay-login">
   <div class="modal">
     <div class="modal-hd">
+      <img src="mm-logo-black.png" alt="Morocco Mall" class="modal-mm-logo">
       <div class="modal-hd-text">
         <h3 id="login-modal-title">Se connecter</h3>
         <p id="login-modal-sub">Accédez à votre espace de participation.</p>
