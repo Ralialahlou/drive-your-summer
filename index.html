@@ -155,6 +155,12 @@
     }
     /* Ensure content inside pattern sections stays above ::after */
     .mm-pattern-dark > *, .mm-pattern-beige > * { position: relative; z-index: 1; }
+    @media(min-width:641px) {
+      .mm-pattern-dark::after, .mm-pattern-beige::after {
+        background-size: 393px auto;
+        background-repeat: repeat;
+      }
+    }
 
     /* ── RESET ─────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
