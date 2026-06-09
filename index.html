@@ -303,11 +303,11 @@
       padding: 14px 20px;
       border-bottom: 1px solid rgba(201,169,110,.28);
     }
-    .nav-brand { display: flex; flex-direction: column; gap: 4px; }
+    .nav-brand { display: flex; flex-direction: column; gap: 2px; align-items: flex-start; }
     /* Morocco Mall logo row */
     .nav-mm { display: flex; align-items: center; line-height: 1; }
     .nav-mm-logo {
-      height: 30px; width: auto; display: block;
+      height: 20px; width: auto; display: block;
       filter: invert(1) brightness(1.05);
     }
     /* Campaign subtitle */
@@ -316,9 +316,9 @@
       font-style: italic; font-weight: 300;
       font-size: .72rem; letter-spacing: .12em;
       color: var(--or); line-height: 1;
-      padding-left: 4px;
+      padding-left: 0;
     }
-    [dir="rtl"] .nav-campaign { padding-left: 0; padding-right: 4px; }
+    [dir="rtl"] .nav-campaign { padding-right: 0; }
     /* kept for JS-generated content that still uses nav-brand-sub */
     .nav-brand-sub {
       font-size: .58rem; letter-spacing: .22em; text-transform: uppercase;
@@ -381,7 +381,7 @@
       margin-bottom: 14px;
     }
     .mm-organizer-logo {
-      height: 30px; width: auto; display: block;
+      height: 20px; width: auto; display: block;
       filter: invert(1) brightness(1.05);
     }
     .mm-organizer-sep { flex: none; width: 22px; height: 1.5px; background: var(--or); opacity: .7; }
@@ -1241,7 +1241,7 @@
 <nav id="nav">
   <button class="nav-brand" onclick="showPage('landing')" style="cursor:pointer;background:none;border:none;text-align:left;">
     <span class="nav-mm">
-      <img src="Morocco-Mall-CORE-LOGO-BLACK.svg" alt="Morocco Mall" class="nav-mm-logo">
+      <img src="Logo_MM_1.svg" alt="Morocco Mall" class="nav-mm-logo">
     </span>
     <span class="nav-campaign">Drive Your Summer</span>
   </button>
@@ -1274,7 +1274,7 @@
     <div class="hero-content container">
       <div class="hero-spacer"></div>
       <div class="mm-organizer fade-up">
-        <img src="Morocco-Mall-CORE-LOGO-BLACK.svg" alt="Morocco Mall" class="mm-organizer-logo">
+        <img src="Logo_MM_1.svg" alt="Morocco Mall" class="mm-organizer-logo">
         <span class="mm-organizer-sep"></span>
         <span class="mm-organizer-tag fr-inline">Drive Your Summer</span>
         <span class="mm-organizer-tag ar-inline">درايف يور صمر</span>
@@ -1475,7 +1475,7 @@
   <!-- FOOTER -->
   <footer class="mm-pattern-dark">
     <div class="footer-inner">
-      <img src="Morocco-Mall-CORE-LOGO-BLACK.svg" alt="Morocco Mall" class="footer-mm-logo">
+      <img src="mm-wordmark.png" alt="Morocco Mall" class="footer-mm-logo">
       <div class="footer-brand">Drive Your <span>Summer</span></div>
       <div class="footer-divider"></div>
       <p class="footer-copy fr-txt">Summer Sales Morocco Mall × Soueast S05 — Été 2026</p>
@@ -1604,7 +1604,7 @@
 <div class="overlay" id="overlay-register">
   <div class="modal">
     <div class="modal-hd">
-      <img src="Morocco-Mall-CORE-LOGO-BLACK.svg" alt="Morocco Mall" class="modal-mm-logo">
+      <img src="mm-wordmark.png" alt="Morocco Mall" class="modal-mm-logo">
       <div class="modal-hd-text">
         <h3 data-i18n="reg.title">Créer mon compte</h3>
         <p data-i18n="reg.sub">Un compte pour suivre toutes vos participations.</p>
@@ -1654,7 +1654,7 @@
 <div class="overlay" id="overlay-login">
   <div class="modal">
     <div class="modal-hd">
-      <img src="Morocco-Mall-CORE-LOGO-BLACK.svg" alt="Morocco Mall" class="modal-mm-logo">
+      <img src="mm-wordmark.png" alt="Morocco Mall" class="modal-mm-logo">
       <div class="modal-hd-text">
         <h3 id="login-modal-title">Se connecter</h3>
         <p id="login-modal-sub">Accédez à votre espace de participation.</p>
