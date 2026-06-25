@@ -1305,10 +1305,17 @@
       .carousel-outer { border-radius: 10px; }
       .car-info { text-align: center; }
       .car-specs { justify-content: center; }
-      .car-info > .btn { width: 100%; }
+      .car-info > .btn { display: block; width: 100%; text-align: center; }
       [dir="rtl"] .car-info { text-align: center; }
       [dir="rtl"] .car-specs { justify-content: center; }
-      [dir="rtl"] .car-info > .btn { width: 100%; }
+      [dir="rtl"] .car-info > .btn { display: block; width: 100%; text-align: center; }
+
+      /* ── CTA button groups: column-stack, centered ── */
+      .rules-cta  { flex-direction: column; align-items: center; }
+      .cta-actions { flex-direction: column; align-items: center; }
+      .rules-cta .btn, .cta-actions .btn { width: 100%; max-width: 400px; text-align: center; }
+      [dir="rtl"] .rules-cta  { flex-direction: column; align-items: center; }
+      [dir="rtl"] .cta-actions { flex-direction: column; align-items: center; }
     }
     @media(max-width:480px) {
       .btn-lg  { padding: 16px 28px; font-size: .82rem; }
@@ -2385,7 +2392,13 @@
       openUpload();
     } else {
       state.pendingAction = 'upload';
-      openOverlay('overlay-register');
+      const savedUser = JSON.parse(localStorage.getItem(LS_USER));
+      if (savedUser && savedUser.pin) {
+        showLoginForm(null);
+        openOverlay('overlay-login');
+      } else {
+        openOverlay('overlay-register');
+      }
     }
   }
 
