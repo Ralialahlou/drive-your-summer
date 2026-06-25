@@ -2409,15 +2409,15 @@
   }
 
   function setUploadModalHd(mode) {
-    const T = translations[currentLang] || translations.fr;
+    const t = T[currentLang] || T.fr;
     const hEl = document.querySelector('#overlay-upload [data-i18n="upload.title"]');
     const pEl = document.querySelector('#overlay-upload [data-i18n="upload.sub"]');
     if (mode === 'success') {
-      if (hEl) hEl.textContent = T['upload.ok.h'] || 'Votre ticket a bien été pris en compte.';
-      if (pEl) pEl.textContent = T['upload.ok.p'] || '';
+      if (hEl) hEl.textContent = t['upload.ok.h'] || 'Votre ticket a bien été pris en compte.';
+      if (pEl) pEl.textContent = t['upload.ok.p'] || '';
     } else {
-      if (hEl) hEl.textContent = T['upload.title'] || 'Ajouter un ticket';
-      if (pEl) pEl.textContent = T['upload.sub']   || 'Téléchargez une photo claire de votre ticket et renseignez le montant total de vos achats.';
+      if (hEl) hEl.textContent = t['upload.title'] || 'Ajouter un ticket';
+      if (pEl) pEl.textContent = t['upload.sub']   || 'Téléchargez une photo claire de votre ticket et renseignez le montant total de vos achats.';
     }
   }
 
