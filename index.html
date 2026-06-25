@@ -1245,24 +1245,25 @@
 
       /* ── Hero slider — mobile adjustments ── */
       /* Hero slider — mobile */
-      .hero-title-block { left: 18px; bottom: max(56px, 8vh); max-width: calc(60% - 18px); }
+      /* Title sits in the lower-middle zone; countdown anchored at the very bottom-right */
+      .hero-title-block { left: 18px; bottom: max(110px, 14vh); max-width: calc(100% - 36px); }
       .hero-topright    { top: max(72px, 10vh); right: 18px; gap: 10px; }
       .hero-badge-70    { padding: 7px 13px; }
       .hero-badge-pct   { font-size: 1.25rem; }
       .hero-badge-label { font-size: .48rem; letter-spacing: .14em; }
       .hero-mm-logo     { height: 15px; }
-      .hero-cd-wrap     { right: 18px; bottom: 56px; }
+      .hero-cd-wrap     { right: 18px; bottom: 30px; text-align: right; }
       .hero-cd-wrap .cd-lbl-title { display: none; }
       .hero-cd-wrap .cd-frame { padding: 6px 10px; }
       .cd-item          { min-width: 38px; }
-      .hero-dots        { bottom: 20px; gap: 7px; }
+      .hero-dots        { bottom: 10px; gap: 7px; }
       .hero-dot         { width: 6px; height: 6px; }
       .hero-sub-slide   { font-size: clamp(.8rem, 3.8vw, .92rem); line-height: 1.5; }
       .nowrap-lg        { white-space: normal; }
       .rules-tagline    { font-size: .72rem; letter-spacing: .1em; margin-top: 14px; }
-      [dir="rtl"] .hero-title-block { left: auto; right: 18px; max-width: calc(60% - 18px); }
+      [dir="rtl"] .hero-title-block { left: auto; right: 18px; max-width: calc(100% - 36px); }
       [dir="rtl"] .hero-topright    { right: auto; left: 18px; }
-      [dir="rtl"] .hero-cd-wrap     { right: auto; left: 18px; }
+      [dir="rtl"] .hero-cd-wrap     { right: auto; left: 18px; text-align: left; }
 
       /* ── Nav: compact on mobile ── */
       #nav { padding: 10px 14px; }
