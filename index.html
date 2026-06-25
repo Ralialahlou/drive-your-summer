@@ -361,124 +361,165 @@
       min-height: max(100dvh, 680px);
       display: flex; flex-direction: column;
     }
-    /* Background image wrapper — overflow:hidden here so the scaled image
-       is clipped without affecting the hero content below */
-    .hero-img-wrap {
+    /* ── HERO SLIDER ─────────────────────────────────────── */
+    #hero {
+      position: relative;
+      height: 100svh;
+      min-height: 560px;
+      overflow: hidden;
+      background: #140d06;
+    }
+    .hero-slider {
       position: absolute; inset: 0;
+      display: flex;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .hero-slider::-webkit-scrollbar { display: none; }
+    .hero-slide {
+      flex: none;
+      width: 100%; height: 100%;
+      scroll-snap-align: start;
+      position: relative;
       overflow: hidden;
     }
-    .hero-bg {
+    .hero-slide-img {
       position: absolute; inset: 0;
-      background: url("soueast%205.jpg") center 40% / cover no-repeat;
-      transform: scale(1.04);
-      transition: transform 7s ease-out;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block;
     }
-    .hero-bg.loaded { transform: scale(1); }
-    .hero-overlay {
+    .hero-slide-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(20,13,6,1)     0%,
-        rgba(20,13,6,.82)   22%,
-        rgba(20,13,6,.40)   52%,
-        rgba(20,13,6,.10)   76%,
-        transparent         100%
-      );
+      background:
+        linear-gradient(to bottom, rgba(20,13,6,.55) 0%, rgba(20,13,6,.15) 35%, rgba(20,13,6,.15) 55%, rgba(20,13,6,.75) 100%),
+        linear-gradient(to right, rgba(20,13,6,.45) 0%, transparent 60%);
     }
-    .hero-content {
-      position: relative; z-index: 2;
-      flex: 1; display: flex; flex-direction: column;
-      width: 100%; max-width: 1140px; margin: 0 auto;
-      padding: 0 20px 80px;
+
+    /* Top-right: discount badge + MM logo */
+    .hero-topright {
+      position: absolute;
+      top: max(96px, 13vh);
+      right: 40px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 14px;
+      pointer-events: none;
     }
-    /* Spacer pushes all hero text to the lower portion of the hero.
-       flex:1 = takes all available space; min-height = never let the date tag
-       rise closer than ~130px from the top of the section (below the nav). */
-    .hero-spacer {
-      flex: 1;
-      min-height: max(130px, 17vh);
+    .hero-badge-70 {
+      color: #fff;
+      font-family: var(--f-sans);
+      border: 1.5px solid rgba(255,255,255,.85);
+      padding: 10px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      white-space: nowrap;
+      backdrop-filter: blur(4px);
     }
-    .hero-eyebrow { margin-bottom: 22px; }
-    .mm-organizer {
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 14px;
+    .hero-badge-label {
+      font-size: clamp(.55rem, 1.1vw, .7rem);
+      font-weight: 400;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      opacity: .9;
     }
-    .mm-organizer-logo {
+    .hero-badge-pct {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -.01em;
+      line-height: 1;
+    }
+    .hero-mm-logo {
       height: 20px; width: auto; display: block;
-      filter: invert(1) brightness(1.05);
+      filter: invert(1) brightness(1.15);
     }
-    .mm-organizer-sep { flex: none; width: 22px; height: 1.5px; background: var(--or); opacity: .7; }
-    .mm-organizer-tag {
-      font-size: .62rem; font-weight: 600; letter-spacing: .2em;
-      text-transform: uppercase; color: var(--or);
+
+    /* Left: title + subtitle */
+    .hero-title-block {
+      position: absolute;
+      left: 40px;
+      bottom: max(100px, 13vh);
+      z-index: 10;
+      max-width: 580px;
+      pointer-events: none;
     }
-    .hero-title   { color: #fff; margin-bottom: 14px; line-height: 0.95; }
-    .hero-title em { font-style: italic; color: var(--or); }
+    .hero-title { color: #fff; margin-bottom: 10px; line-height: 0.92; }
     .hero-drive {
       font-family: var(--f-didot);
       font-style: italic; font-weight: 400;
+      font-size: clamp(2.8rem, 6.5vw, 5.2rem);
       display: block;
+      text-shadow: 0 2px 24px rgba(0,0,0,.6);
     }
     .hero-summer {
       font-family: 'Canela Trial', Georgia, serif;
       font-style: italic; font-weight: 500;
+      font-size: clamp(3rem, 7vw, 5.8rem);
       color: var(--or);
-    }
-    .hero-title-mm {
       display: block;
-      font-family: var(--f-sans); font-weight: 600;
-      font-size: clamp(.8rem, 1.8vw, 1.1rem);
-      letter-spacing: .28em; text-transform: uppercase;
-      color: var(--or); opacity: .9;
-      margin-bottom: 10px;
+      text-shadow: 0 2px 24px rgba(0,0,0,.5);
     }
-    .hero-sub {
-      font-family: 'Mulish', system-ui, sans-serif;
-      font-style: italic;
-      font-weight: 600;
-      font-size: clamp(.95rem,2.1vw,1.2rem);
-      color: var(--on-dark-mid);
-      margin-bottom: 36px;
-      max-width: 500px;
-      letter-spacing: .02em;
+    .hero-sub-slide {
+      font-family: var(--f-sans);
+      font-weight: 500;
+      font-size: clamp(.82rem, 1.5vw, .98rem);
+      color: rgba(255,255,255,.85);
+      line-height: 1.6;
+      margin: 0;
+      text-shadow: 0 1px 10px rgba(0,0,0,.55);
     }
-    .hero-actions {
-      display: flex; flex-wrap: wrap;
-      gap: 12px; margin-bottom: 50px; align-items: center;
-    }
+    [lang="ar"] .hero-sub-slide { font-family: 'Cairo', system-ui, sans-serif; }
+    [lang="ar"] .hero-badge-70  { font-family: 'Cairo', system-ui, sans-serif; }
+    .nowrap-lg { white-space: nowrap; }
 
-    /* Countdown */
+    /* Bottom-right: countdown */
+    .hero-cd-wrap {
+      position: absolute;
+      right: 40px;
+      bottom: 40px;
+      z-index: 10;
+      pointer-events: none;
+      text-align: right;
+    }
     .cd-lbl-title {
-      font-size: .62rem; letter-spacing: .16em;
-      text-transform: uppercase; color: var(--on-dark-muted); margin-bottom: 10px;
+      font-size: .58rem; letter-spacing: .16em;
+      text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 8px;
     }
     .countdown { display: flex; align-items: flex-start; }
-    .cd-item   { display: flex; flex-direction: column; align-items: center; min-width: 60px; }
+    .cd-item   { display: flex; flex-direction: column; align-items: center; min-width: 50px; }
     .cd-num {
       font-family: var(--f-sans);
-      font-size: clamp(1.9rem,4.5vw,2.8rem);
+      font-size: clamp(1.5rem, 3.2vw, 2.2rem);
       font-weight: 700;
       color: var(--or);
       line-height: 1; letter-spacing: -.02em;
     }
-    .cd-lbl { font-size: .58rem; text-transform: uppercase; letter-spacing: .14em; color: var(--on-dark-muted); margin-top: 5px; }
-    .cd-sep { font-family: var(--f-serif); font-size: 2rem; color: rgba(201,169,110,.4); padding: 0 3px; line-height: 1; padding-top: 2px; }
+    .cd-lbl { font-size: .5rem; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.4); margin-top: 4px; }
+    .cd-sep { font-family: var(--f-serif); font-size: 1.7rem; color: rgba(201,169,110,.35); padding: 0 2px; line-height: 1; padding-top: 2px; }
 
-    /* Scroll cue */
-    .scroll-cue {
-      position: absolute; bottom: 26px; left: 50%;
-      transform: translateX(-50%); z-index: 2;
-      display: flex; flex-direction: column; align-items: center; gap: 7px;
-      opacity: .4;
+    /* Slide navigation dots */
+    .hero-dots {
+      position: absolute;
+      bottom: 18px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex; gap: 8px; align-items: center;
     }
-    .scroll-cue span { font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: #fff; }
-    .scroll-arrow {
-      width: 16px; height: 16px;
-      border-right: 1.5px solid #fff;
-      border-bottom: 1.5px solid #fff;
-      transform: rotate(45deg);
-      animation: bounce 1.8s ease-in-out infinite;
+    .hero-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.35);
+      border: none; cursor: pointer; padding: 0;
+      transition: background .3s, transform .3s;
     }
+    .hero-dot.active { background: var(--or); transform: scale(1.3); }
     @keyframes bounce { 0%,100%{transform:rotate(45deg) translateY(0)} 50%{transform:rotate(45deg) translateY(5px)} }
 
     /* ── RULES ─────────────────────────────────────────────── */
@@ -533,6 +574,16 @@
     .rule-card p  { font-size: .875rem; color: var(--text-mid); line-height: 1.75; font-family: 'Mulish', system-ui, sans-serif; font-weight: 600; font-style: italic; }
     .rule-card strong { color: var(--corail); font-weight: 500; }
     .rules-note { margin-top: 32px; font-size: .75rem; color: var(--text-muted); font-style: italic; text-align: center; }
+    .rules-tagline {
+      margin-top: 16px;
+      font-family: var(--f-sans);
+      font-weight: 800;
+      font-size: clamp(.72rem, 1.4vw, .85rem);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--or);
+      text-align: center;
+    }
     .rules-cta  { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 48px; }
 
     /* ── CAR SHOWCASE — sable section ───────────────────────── */
@@ -801,11 +852,11 @@
     }
     .dash-wide { grid-column: 1 / -1; }
 
-    /* Road progress */
-    .road-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-    .road-scene { width: 190px; }
-    .road-scene svg { width: 100%; height: auto; display: block; }
-    #road-car { transition: transform 1.4s cubic-bezier(.22,.68,0,1.2); }
+    /* Speedometer progress */
+    .speedo-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; max-width: 340px; margin: 0 auto; }
+    .speedo-scene { width: 100%; max-width: 220px; }
+    .speedo-scene svg { width: 100%; height: auto; display: block; }
+    #speedo-arc { transition: stroke-dashoffset 1.4s cubic-bezier(.22,.68,0,1.2); }
     .ring-total { font-size: 1.3rem; font-weight: 700; color: var(--or); line-height: 1; }
     .ring-mad   { font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; color: var(--text-muted); margin-top: 3px; }
     .ring-badge { font-style: italic; font-weight: 400; font-size: .9rem; color: var(--text); margin-top: 6px; }
@@ -1082,7 +1133,7 @@
       padding: 18px 20px; text-align: center;
     }
     .code-sent-label { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
-    .code-sent-value { font-size: 2.2rem; font-weight: 700; letter-spacing: .2em; color: var(--or); font-family: monospace; margin-bottom: 8px; }
+    .code-sent-value { font-size: 2.2rem; font-weight: 700; letter-spacing: .2em; color: var(--or); font-family: var(--f-sans); margin-bottom: 8px; }
     .code-sent-note { font-size: .68rem; color: var(--text-muted); font-style: italic; line-height: 1.5; }
 
     /* ── BILINGUAL / RTL ───────────────────────────────────── */
@@ -1096,7 +1147,7 @@
     }
 
     /* RTL layout flips */
-    [dir="rtl"] .hero-content  { text-align: right; }
+    [dir="rtl"] .hero-title-block { left: auto; right: 40px; text-align: right; }
     [dir="rtl"] .rules-hd      { text-align: right; }
     [dir="rtl"] .car-info       { text-align: right; }
     [dir="rtl"] .footer-inner   { text-align: center; }
@@ -1104,7 +1155,8 @@
     [dir="rtl"] .eyebrow        { text-align: right; }
     [dir="rtl"] .back-btn       { flex-direction: row-reverse; }
     [dir="rtl"] .dash-greeting  { text-align: right; }
-    [dir="rtl"] .hero-actions   { flex-direction: row-reverse; justify-content: flex-end; }
+    [dir="rtl"] .hero-topright  { right: auto; left: 40px; align-items: flex-start; }
+    [dir="rtl"] .hero-cd-wrap  { right: auto; left: 40px; text-align: left; }
     [dir="rtl"] .countdown      { flex-direction: row-reverse; }
     [dir="rtl"] .level-item     { flex-direction: row-reverse; }
     [dir="rtl"] .receipt-row    { flex-direction: row-reverse; }
@@ -1190,20 +1242,24 @@
       .form-row{ grid-template-columns: 1fr; }
       .spec-item { padding: 12px 16px; }
 
-      /* ── Hero — reduce crowding on mobile ── */
-      .hero-spacer { min-height: 80px; }
-      .hero-eyebrow { margin-bottom: 12px; }
-      .hero-title   { margin-bottom: 8px; font-size: clamp(2.4rem, 11vw, 3.4rem); }
-      .hero-eyebrow .tag:last-child { display: none; }
-      .hero-sub { display: none; }
-      .hero-actions,
-      [dir="rtl"] .hero-actions {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 8px;
-        margin-bottom: 28px;
-      }
-      .hero-actions .btn { width: 100%; justify-content: center; }
+      /* ── Hero slider — mobile adjustments ── */
+      /* Hero slider — mobile */
+      .hero-title-block { left: 18px; bottom: max(88px, 12vh); max-width: calc(100% - 36px); }
+      .hero-topright    { top: max(72px, 10vh); right: 18px; gap: 10px; }
+      .hero-badge-70    { padding: 7px 13px; }
+      .hero-badge-pct   { font-size: 1.25rem; }
+      .hero-badge-label { font-size: .48rem; letter-spacing: .14em; }
+      .hero-mm-logo     { height: 15px; }
+      .hero-cd-wrap     { right: 18px; bottom: 36px; }
+      .cd-item          { min-width: 38px; }
+      .hero-dots        { bottom: 10px; gap: 7px; }
+      .hero-dot         { width: 6px; height: 6px; }
+      .hero-sub-slide   { font-size: clamp(.8rem, 3.8vw, .92rem); line-height: 1.5; }
+      .nowrap-lg        { white-space: normal; }
+      .rules-tagline    { font-size: .72rem; letter-spacing: .1em; margin-top: 14px; }
+      [dir="rtl"] .hero-title-block { left: auto; right: 18px; }
+      [dir="rtl"] .hero-topright    { right: auto; left: 18px; }
+      [dir="rtl"] .hero-cd-wrap     { right: auto; left: 18px; }
 
       /* ── Nav: compact on mobile ── */
       #nav { padding: 10px 14px; }
@@ -1253,9 +1309,6 @@
       .cd-item { min-width: 52px; }
       #toasts  { right: 10px; bottom: 70px; }
     }
-    @media(max-width:640px) {
-      .hero-bg { transform: none !important; transition: none !important; }
-    }
   </style>
 </head>
 <body>
@@ -1279,7 +1332,7 @@
       <button class="lang-btn active" id="btn-lang-fr" onclick="setLanguage('fr')">FR</button>
       <button class="lang-btn" id="btn-lang-ar" onclick="setLanguage('ar')">عربي</button>
     </div>
-    <button class="btn btn-primary btn-sm" onclick="handleUploadCTA()" data-i18n="nav.cta">Participer</button>
+    <button class="btn btn-primary btn-sm" onclick="handleUploadCTA()" data-i18n="nav.cta">Je participe</button>
   </div>
   <!-- Mobile-only profile icon -->
   <button class="nav-mobile-btn" id="nav-mobile-btn" onclick="toggleMobileMenu()" aria-label="Menu">
@@ -1294,55 +1347,65 @@
 <!-- ████ LANDING PAGE ████ -->
 <div id="page-landing" class="pg-enter">
 
-  <!-- HERO -->
+  <!-- HERO SLIDER -->
   <section id="hero">
-    <div class="hero-img-wrap">
-      <div class="hero-bg" id="hero-bg"></div>
-      <div class="hero-overlay"></div>
+    <!-- Scrollable image track -->
+    <div class="hero-slider" id="hero-slider">
+      <div class="hero-slide"><img src="img/keys/Key2.png"  class="hero-slide-img" alt="Drive Your Summer" fetchpriority="high"><div class="hero-slide-overlay"></div></div>
+      <div class="hero-slide"><img src="img/keys/Key12.png" class="hero-slide-img" alt="Drive Your Summer" loading="lazy"><div class="hero-slide-overlay"></div></div>
+      <div class="hero-slide"><img src="img/keys/Key19.png" class="hero-slide-img" alt="Drive Your Summer" loading="lazy"><div class="hero-slide-overlay"></div></div>
+      <div class="hero-slide"><img src="img/keys/Key22.png" class="hero-slide-img" alt="Drive Your Summer" loading="lazy"><div class="hero-slide-overlay"></div></div>
+      <div class="hero-slide"><img src="img/keys/Key23.png" class="hero-slide-img" alt="Drive Your Summer" loading="lazy"><div class="hero-slide-overlay"></div></div>
+      <div class="hero-slide"><img src="img/keys/Key24.png" class="hero-slide-img" alt="Drive Your Summer" loading="lazy"><div class="hero-slide-overlay"></div></div>
     </div>
-    <div class="hero-content container">
-      <div class="hero-spacer"></div>
-      <div class="mm-organizer fade-up">
-        <img src="Logo_MM_1.svg" alt="Morocco Mall" class="mm-organizer-logo">
-        <span class="mm-organizer-sep"></span>
-        <span class="mm-organizer-tag fr-inline">Drive Your Summer</span>
-        <span class="mm-organizer-tag ar-inline">درايف يور صمر</span>
+
+    <!-- Top-right: discount badge + Morocco Mall logo -->
+    <div class="hero-topright">
+      <div class="hero-badge-70 fr-txt">
+        <span class="hero-badge-label">Jusqu'à</span>
+        <span class="hero-badge-pct">-70%</span>
       </div>
-      <div class="hero-eyebrow">
-        <span class="tag"><span class="tag-dot"></span><span data-i18n="hero.tag">6 juillet – 27 juillet 2026</span></span>
+      <div class="hero-badge-70 ar-txt">
+        <span class="hero-badge-label">حتى</span>
+        <span class="hero-badge-pct">-70%</span>
       </div>
-      <h1 class="hero-title fade-up">
-        <span class="hero-title-mm">Morocco Mall</span><br>
+      <img src="Logo_MM_1.svg" alt="Morocco Mall" class="hero-mm-logo">
+    </div>
+
+    <!-- Left: title + subtitle -->
+    <div class="hero-title-block">
+      <h1 class="hero-title">
         <span class="hero-drive">Drive Your</span>
         <em class="hero-summer">Summer</em>
       </h1>
-      <p class="hero-sub fade-up" data-i18n="hero.sub">Drive into summer. Win the ultimate reward.</p>
-      <div class="hero-actions fade-up">
-        <button class="btn btn-primary btn-lg" onclick="handleUploadCTA()" data-i18n="nav.cta">
-          Télécharger mon ticket
-        </button>
-        <button class="btn btn-outline-light" onclick="scrollTo2('rules')" data-i18n="hero.cta2">
-          Voir les règles
-        </button>
-      </div>
-      <div class="fade-up">
-        <p class="cd-lbl-title" data-i18n="hero.cdlbl">Fin de la campagne dans</p>
-        <div class="cd-frame">
-          <div class="countdown">
-            <div class="cd-item"><span class="cd-num" id="cd-d">52</span><span class="cd-lbl" data-i18n="cd.d">Jours</span></div>
-            <span class="cd-sep">:</span>
-            <div class="cd-item"><span class="cd-num" id="cd-h">00</span><span class="cd-lbl" data-i18n="cd.h">Heures</span></div>
-            <span class="cd-sep">:</span>
-            <div class="cd-item"><span class="cd-num" id="cd-m">00</span><span class="cd-lbl" data-i18n="cd.m">Minutes</span></div>
-            <span class="cd-sep">:</span>
-            <div class="cd-item"><span class="cd-num" id="cd-s">00</span><span class="cd-lbl" data-i18n="cd.s">Secondes</span></div>
-          </div>
+      <p class="hero-sub-slide fr-txt">Jusqu'à -70% sur plus de 360 marques et une Soueast S05 à gagner.</p>
+      <p class="hero-sub-slide ar-txt">استفد من تخفيضات تصل إلى 70% على أكثر من 360 علامة تجارية، واغتنم فرصتك للفوز بسيارة Soueast S05.</p>
+    </div>
+
+    <!-- Bottom-right: countdown -->
+    <div class="hero-cd-wrap">
+      <p class="cd-lbl-title" data-i18n="hero.cdlbl">Le compte à rebours est lancé.</p>
+      <div class="cd-frame">
+        <div class="countdown">
+          <div class="cd-item"><span class="cd-num" id="cd-d">11</span><span class="cd-lbl" data-i18n="cd.d">Jours</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-item"><span class="cd-num" id="cd-h">00</span><span class="cd-lbl" data-i18n="cd.h">Heures</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-item"><span class="cd-num" id="cd-m">00</span><span class="cd-lbl" data-i18n="cd.m">Minutes</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-item"><span class="cd-num" id="cd-s">00</span><span class="cd-lbl" data-i18n="cd.s">Secondes</span></div>
         </div>
       </div>
     </div>
-    <div class="scroll-cue">
-      <span data-i18n="hero.scroll">Découvrir</span>
-      <div class="scroll-arrow"></div>
+
+    <!-- Slide navigation dots -->
+    <div class="hero-dots" id="hero-dots">
+      <button class="hero-dot active" data-idx="0" aria-label="Slide 1"></button>
+      <button class="hero-dot" data-idx="1" aria-label="Slide 2"></button>
+      <button class="hero-dot" data-idx="2" aria-label="Slide 3"></button>
+      <button class="hero-dot" data-idx="3" aria-label="Slide 4"></button>
+      <button class="hero-dot" data-idx="4" aria-label="Slide 5"></button>
+      <button class="hero-dot" data-idx="5" aria-label="Slide 6"></button>
     </div>
   </section>
 
@@ -1357,8 +1420,8 @@
       <div class="rules-hd fade-up">
         <p class="eyebrow fr-txt" data-i18n="rules.eyebrow">La règle du jeu</p>
         <p class="eyebrow ar-txt">قواعد اللعبة</p>
-        <h2 class="fr-txt" style="color:var(--text)">Comment <em class="f-i" style="color:var(--corail)">participer ?</em></h2>
-        <h2 class="ar-txt" style="color:var(--text)">كيف <em class="f-i" style="color:var(--corail)">تشارك؟</em></h2>
+        <h2 class="fr-txt nowrap-lg" style="color:var(--text)">Comment <em class="f-i" style="color:var(--corail)">tenter votre chance ?</em></h2>
+        <h2 class="ar-txt" style="color:var(--text)">كيف <em class="f-i" style="color:var(--corail)">تحظى بفرصتك ؟</em></h2>
       </div>
       <div class="rules-grid">
         <div class="rule-card fade-up">
@@ -1370,10 +1433,10 @@
               <path d="M16 10a4 4 0 01-8 0"/>
             </svg>
           </div>
-          <h3 class="fr-txt">Achetez au Morocco Mall</h3>
-          <h3 class="ar-txt">تسوّق في موروكو مول</h3>
-          <p class="fr-txt">Effectuez vos achats pour un minimum de <strong>1 000 MAD</strong> dans n'importe quelle enseigne du Morocco Mall. Plusieurs tickets cumulables !</p>
-          <p class="ar-txt">اشترِ بـ <strong>1.000 درهم</strong> أو أكثر في أي متجر بموروكو مول. يمكن تجميع عدة فواتير!</p>
+          <h3 class="fr-txt">Faites-vous plaisir</h3>
+          <h3 class="ar-txt">استمتع بتسوّقك</h3>
+          <p class="fr-txt">Shoppez vos marques préférées au Morocco Mall et cumulez au moins <strong>1 000 DH</strong> d'achats.</p>
+          <p class="ar-txt">تسوّق من علاماتك التجارية المفضلة في Morocco Mall واجمع مشتريات بقيمة <strong>1000 درهم</strong> أو أكثر.</p>
         </div>
         <div class="rule-card fade-up">
           <div class="rule-num">02</div>
@@ -1385,10 +1448,10 @@
               <line x1="16" y1="17" x2="8" y2="17"/>
             </svg>
           </div>
-          <h3 class="fr-txt">Photographiez votre ticket</h3>
-          <h3 class="ar-txt">صوّر فاتورتك</h3>
-          <p class="fr-txt">Prenez une photo nette de votre <strong>ticket de caisse</strong>. Le montant et la date doivent être clairement visibles.</p>
-          <p class="ar-txt">التقط صورة واضحة لـ<strong>فاتورتك</strong>. يجب أن يظهر المبلغ والتاريخ بوضوح.</p>
+          <h3 class="fr-txt">Cumulez vos chances</h3>
+          <h3 class="ar-txt">ضاعف فرصك</h3>
+          <p class="fr-txt">Téléchargez votre ticket et augmentez vos opportunités de gagner.</p>
+          <p class="ar-txt">حمّل وصل الشراء الخاص بك وزِد من فرصك في الفوز.</p>
         </div>
         <div class="rule-card fade-up">
           <div class="rule-num">03</div>
@@ -1400,13 +1463,15 @@
             </svg>
           </div>
           <h3 class="fr-txt">Gagnez la Soueast S05</h3>
-          <h3 class="ar-txt">اربح سيارة سوييست</h3>
-          <p class="fr-txt">Soumettez vos tickets et cumulez des chances. <strong>Les 20 meilleurs acheteurs</strong> se disputent la voiture.</p>
-          <p class="ar-txt">حمّل فواتيرك وراكم الفرص. <strong>أفضل 20 مشاركاً</strong> يتنافسون على السيارة.</p>
+          <h3 class="ar-txt">اربح سيارة Soueast S05</h3>
+          <p class="fr-txt">Les 20 meilleurs acheteurs seront finalistes. L'un d'eux repartira au volant de la Soueast S05.</p>
+          <p class="ar-txt">سيتأهل أفضل 20 متسوقًا إلى المرحلة النهائية، وسيفوز أحدهم بسيارة Soueast S05.</p>
         </div>
       </div>
-      <p class="rules-note fr-txt">* Valable dans toutes les enseignes du Morocco Mall (hors Marjane). Participation illimitée.</p>
-      <p class="rules-note ar-txt">* صالح في جميع متاجر موروكو مول (ما عدا مرجان). مشاركة غير محدودة.</p>
+      <p class="rules-note fr-txt">* Valable dans toutes les enseignes du Morocco Mall (hors Marjane).</p>
+      <p class="rules-note ar-txt">* صالح في جميع متاجر Morocco Mall (باستثناء مرجان).</p>
+      <p class="rules-tagline fr-txt">Chaque ticket compte et vous rapproche de la victoire.</p>
+      <p class="rules-tagline ar-txt">كل إيصال يقرّبك من قائمة أفضل 20 متسوقًا.</p>
       <div class="rules-cta">
         <button class="btn btn-primary btn-lg" onclick="handleUploadCTA()" data-i18n="rules.cta1">Je participe maintenant</button>
         <button class="btn btn-outline-bleu" onclick="scrollTo2('car-showcase')" data-i18n="rules.cta2">Voir la voiture à gagner</button>
@@ -1427,11 +1492,13 @@
         <div class="car-info fade-up">
           <p class="eyebrow fr-txt">Le prix à gagner</p>
           <p class="eyebrow ar-txt">الجائزة الكبرى</p>
-          <h2 class="fr-txt" style="color:var(--text)">Votre prochain <em class="f-i" style="color:var(--or)">bolide</em></h2>
-          <h2 class="ar-txt" style="color:var(--text)">سيارتك <em class="f-i" style="color:var(--or)">القادمة</em></h2>
+          <h2 class="fr-txt" style="color:var(--text)">Morocco Mall vous fait gagner <em class="f-i" style="color:var(--or)">une Soueast S05</em></h2>
+          <h2 class="ar-txt" style="color:var(--text)">Morocco Mall يمنحك فرصة الفوز <em class="f-i" style="color:var(--or)">بسيارة Soueast S05</em></h2>
           <p class="car-name-big">Soueast S05</p>
-          <p class="fr-txt">Un SUV électrique premium d'une valeur de <strong>300 000 MAD</strong>. Design audacieux, technologie embarquée dernier cri et conduite silencieuse — la récompense ultime de votre été marocain.</p>
-          <p class="ar-txt">سيارة SUV كهربائية فاخرة بقيمة <strong>300.000 درهم</strong>. تصميم جريء، أحدث التقنيات وقيادة صامتة — الجائزة المثلى لصيفك المغربي.</p>
+          <p class="fr-txt">Faites vos achats, téléchargez vos tickets et tentez de rejoindre les 20 finalistes.</p>
+          <p class="ar-txt">قم بمشترياتك، حمّل إيصالاتك، وحاول أن تكون من بين المتأهلين العشرين إلى المرحلة النهائية.</p>
+          <p class="car-info fr-txt">Alliance parfaite entre design raffiné, technologie de pointe et confort absolu, ce SUV a été pensé pour sublimer chacun de vos trajets. Chaque achat vous rapproche un peu plus du volant.</p>
+          <p class="car-info ar-txt">يجمع هذا الـ SUV بين التصميم الأنيق، والتكنولوجيا المتطورة، والراحة الاستثنائية، ليمنحك تجربة قيادة ترتقي بكل رحلة. كل عملية شراء تقرّبك أكثر من المقعد خلف المقود.</p>
           <div class="car-specs">
             <div class="spec-item">
               <span class="spec-val">300 000</span>
@@ -1450,7 +1517,7 @@
               <span class="spec-lbl ar-txt">المتأهلون</span>
             </div>
           </div>
-          <button class="btn btn-primary" onclick="handleUploadCTA()" data-i18n="car.cta">🏎️ Je veux cette voiture !</button>
+          <button class="btn btn-primary" onclick="handleUploadCTA()" data-i18n="car.cta">Je tente ma chance</button>
         </div>
         <div class="car-visual fade-up">
           <div class="carousel-outer">
@@ -1484,20 +1551,22 @@
   <section id="upload-cta" class="section">
     <div class="container">
       <div class="cta-inner fade-up">
-        <p class="eyebrow fr-txt">Prêt(e) à prendre le volant ?</p>
-        <p class="eyebrow ar-txt">مستعد/ة للانطلاق؟</p>
-        <h2 class="fr-txt">Chaque ticket vous rapproche <em class="f-i" style="color:var(--corail)">de la victoire</em></h2>
-        <h2 class="ar-txt">كل فاتورة تقرّبك <em class="f-i" style="color:var(--corail)">من النصر</em></h2>
-        <p class="fr-txt">Achetez pour 1 000 MAD ou plus dans n'importe quelle enseigne du Morocco Mall et uploadez votre ticket. Participez autant de fois que vous voulez — les <strong>20 participants ayant le plus grand total d'achats</strong> seront sélectionnés, et l'un d'eux remportera la Soueast S05 !</p>
-        <p class="ar-txt">اشترِ بـ 1.000 درهم أو أكثر في أي متجر بموروكو مول وحمّل فاتورتك. شارك كم تشاء — <strong>أفضل 20 مشارك</strong> من حيث إجمالي المشتريات سيُختارون، وسيفوز أحدهم بسوييست S05!</p>
+        <p class="eyebrow fr-txt">Chaque achat vous rapproche du volant</p>
+        <p class="eyebrow ar-txt">كل عملية شراء تقرّبك أكثر من المقود</p>
+        <h2 class="fr-txt">La route vers la Soueast S05 <em class="f-i" style="color:var(--corail)">commence ici</em></h2>
+        <h2 class="ar-txt">طريقك نحو الفوز بسيارة <em class="f-i" style="color:var(--corail)">Soueast S05 يبدأ من هنا</em></h2>
+        <p class="fr-txt">Faites vos achats au Morocco Mall, téléchargez vos tickets et tentez de rejoindre les 20 finalistes.</p>
+        <p class="fr-txt">Cumulez vos tickets, grimpez dans le classement et tentez de faire partie des 20 finalistes.</p>
+        <p class="ar-txt">تسوّق في Morocco Mall، حمّل إيصالات الشراء الخاصة بك، وحاول أن تكون من بين أفضل 20 متسوقًا المتأهلين إلى المرحلة النهائية.</p>
+        <p class="ar-txt">كل إيصال يمنحك فرصة إضافية للارتقاء في الترتيب وزيادة حظوظك في الوصول إلى النهائي.</p>
         <div class="cta-actions">
-          <button class="btn btn-primary btn-lg" onclick="handleUploadCTA()" data-i18n="cta.btn1">Télécharger mon ticket maintenant</button>
+          <button class="btn btn-primary btn-lg" onclick="handleUploadCTA()" data-i18n="cta.btn1">Je télécharge mon ticket de caisse</button>
           <button id="btn-my-dashboard" class="btn btn-outline-or" onclick="showPage('dashboard')" style="display:none" data-i18n="cta.dash">
             Mon tableau de bord
           </button>
         </div>
-        <p class="cta-note fr-txt">* Valable dans toutes les enseignes du Morocco Mall, hors Marjane. Du 6 au 27 juillet 2026.</p>
-        <p class="cta-note ar-txt">* صالح في جميع متاجر موروكو مول، ما عدا مرجان. من 6 إلى 27 يوليوز 2026.</p>
+        <p class="cta-note fr-txt">Valable dans toutes les enseignes du Morocco Mall, hors Marjane. Du 6 au 27 juillet 2026.</p>
+        <p class="cta-note ar-txt">العرض ساري في جميع متاجر Morocco Mall (باستثناء مرجان)، وذلك من 6 إلى 27 يوليوز 2026.</p>
       </div>
     </div>
   </section>
@@ -1550,57 +1619,60 @@
   <div class="dash-body">
     <div class="dash-grid">
       <!-- Personal meter -->
-      <div class="dash-card">
-        <p class="dash-card-title" data-i18n="dash.progress">Ma progression</p>
-        <div class="road-wrap">
-          <div class="road-scene">
-            <svg viewBox="0 0 200 310" xmlns="http://www.w3.org/2000/svg">
+      <div class="dash-card dash-wide">
+        <p class="dash-card-title" data-i18n="dash.progress" style="text-align:center">Ma progression</p>
+        <div class="speedo-wrap">
+          <div class="speedo-scene">
+            <!-- Speedometer: center (120,95) R=75, sweep 135°→45° clockwise (270°) -->
+            <!-- arc length = 2π×75×(270/360) ≈ 353.4 -->
+            <svg viewBox="0 0 240 165" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#0d1f2a"/>
-                  <stop offset="100%" stop-color="#1a130a"/>
+                <linearGradient id="arcGrad" gradientUnits="userSpaceOnUse" x1="67" y1="148" x2="173" y2="148">
+                  <stop offset="0%" stop-color="#E07850"/>
+                  <stop offset="100%" stop-color="#C9A96E"/>
                 </linearGradient>
               </defs>
-              <rect width="200" height="310" fill="url(#bgGrad)" rx="10"/>
-              <circle cx="24" cy="28" r="1.2" fill="rgba(201,169,110,0.5)"/>
-              <circle cx="168" cy="20" r="0.9" fill="rgba(255,255,255,0.4)"/>
-              <circle cx="48" cy="52" r="1" fill="rgba(255,255,255,0.3)"/>
-              <circle cx="152" cy="42" r="0.8" fill="rgba(201,169,110,0.35)"/>
-              <circle cx="80" cy="16" r="0.9" fill="rgba(255,255,255,0.28)"/>
-              <!-- Road shadow -->
-              <path d="M100,298 C62,262 148,224 100,182 C52,140 148,102 100,60 C78,32 100,18 100,16"
-                    stroke="#0d0d0d" stroke-width="32" fill="none" stroke-linecap="round"/>
-              <!-- Road surface -->
-              <path id="road-path"
-                    d="M100,298 C62,262 148,224 100,182 C52,140 148,102 100,60 C78,32 100,18 100,16"
-                    stroke="#2d2516" stroke-width="28" fill="none" stroke-linecap="round"/>
-              <!-- Center dashes -->
-              <path d="M100,298 C62,262 148,224 100,182 C52,140 148,102 100,60 C78,32 100,18 100,16"
-                    stroke="rgba(201,169,110,0.3)" stroke-width="1.5" fill="none"
-                    stroke-dasharray="12 10" stroke-linecap="butt"/>
-              <!-- Milestone dots at approx 25%, 50%, 75% along path -->
-              <circle class="road-ms" cx="80" cy="221" r="4" fill="rgba(201,169,110,0.25)" stroke="rgba(201,169,110,0.5)" stroke-width="1"/>
-              <circle class="road-ms" cx="118" cy="143" r="4" fill="rgba(201,169,110,0.25)" stroke="rgba(201,169,110,0.5)" stroke-width="1"/>
-              <circle class="road-ms" cx="82"  cy="65"  r="4" fill="rgba(201,169,110,0.25)" stroke="rgba(201,169,110,0.5)" stroke-width="1"/>
-              <!-- Start -->
-              <circle cx="100" cy="298" r="10" fill="#2d2516" stroke="rgba(224,120,80,0.7)" stroke-width="2"/>
-              <text x="100" y="302" text-anchor="middle" font-size="8" fill="#E07850" font-family="Mulish,sans-serif" font-weight="700">GO</text>
-              <!-- Top 20 -->
-              <circle cx="100" cy="16" r="13" fill="#C9A96E"/>
-              <text x="100" y="13.5" text-anchor="middle" font-size="6.5" fill="#1a130a" font-family="Mulish,sans-serif" font-weight="800">TOP</text>
-              <text x="100" y="22" text-anchor="middle" font-size="6.5" fill="#1a130a" font-family="Mulish,sans-serif" font-weight="800">20</text>
-              <!-- Car: top-down view, facing right (angle=0 = facing right) -->
-              <g id="road-car">
-                <rect x="-15" y="-8" width="30" height="16" rx="5" fill="#C9A96E"/>
-                <rect x="6"   y="-5" width="7"  height="10" rx="2" fill="rgba(20,13,6,0.5)"/>
-                <rect x="-12" y="-5" width="5"  height="10" rx="2" fill="rgba(20,13,6,0.4)"/>
-                <rect x="-10" y="-13" width="7" height="5"  rx="1.5" fill="#111"/>
-                <rect x="3"   y="-13" width="7" height="5"  rx="1.5" fill="#111"/>
-                <rect x="-10" y="9"  width="7"  height="5"  rx="1.5" fill="#111"/>
-                <rect x="3"   y="9"  width="7"  height="5"  rx="1.5" fill="#111"/>
-                <circle cx="16" cy="-4" r="2.2" fill="rgba(255,240,150,0.85)"/>
-                <circle cx="16" cy="4"  r="2.2" fill="rgba(255,240,150,0.85)"/>
+              <!-- Dashboard background -->
+              <rect width="240" height="165" fill="#0b0b14" rx="12"/>
+              <!-- Gauge track (full 270° arc) -->
+              <path d="M 67 148 A 75 75 0 1 1 173 148"
+                    fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="12" stroke-linecap="round"/>
+              <!-- Red zone: 200–260 km/h (342.69° → 45°) -->
+              <path d="M 192 73 A 75 75 0 0 1 173 148"
+                    fill="none" stroke="rgba(210,60,40,0.2)" stroke-width="12" stroke-linecap="round"/>
+              <!-- Active gauge fill -->
+              <path id="speedo-arc"
+                    d="M 67 148 A 75 75 0 1 1 173 148"
+                    fill="none" stroke="url(#arcGrad)" stroke-width="12" stroke-linecap="round"
+                    stroke-dasharray="353.4" stroke-dashoffset="353.4"/>
+              <!-- Major tick: 0 km/h (135°) -->
+              <line x1="67" y1="148" x2="74" y2="141" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/>
+              <!-- Minor tick: 50 km/h (186.92°) -->
+              <line x1="46" y1="86" x2="55" y2="87" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+              <!-- Major tick: 100 km/h (238.85°) -->
+              <line x1="81" y1="31" x2="86" y2="39" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/>
+              <!-- Minor tick: 150 km/h (290.77°) -->
+              <line x1="147" y1="25" x2="143" y2="34" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+              <!-- Major tick: 200 km/h (342.69°) -->
+              <line x1="192" y1="73" x2="182" y2="76" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/>
+              <!-- Major tick: 260 km/h (45°) -->
+              <line x1="173" y1="148" x2="166" y2="141" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/>
+              <!-- Speed labels (at R=86 from center) -->
+              <text x="59" y="160" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.4)" font-family="Mulish,sans-serif">0</text>
+              <text x="75" y="22" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.4)" font-family="Mulish,sans-serif">100</text>
+              <text x="202" y="69" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.4)" font-family="Mulish,sans-serif">200</text>
+              <text x="181" y="160" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.4)" font-family="Mulish,sans-serif">260</text>
+              <!-- Needle: group centered at (120,95), needle tip at 135° = (-48,48) -->
+              <g id="speedo-needle-group" transform="translate(120,95) rotate(0)">
+                <line x1="0" y1="0" x2="-48" y2="48" stroke="#E07850" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="0" y1="0" x2="7" y2="-7" stroke="#E07850" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
               </g>
+              <!-- Center hub -->
+              <circle cx="120" cy="95" r="8" fill="#0b0b14" stroke="#C9A96E" stroke-width="2"/>
+              <circle cx="120" cy="95" r="3" fill="#C9A96E"/>
+              <!-- Speed readout -->
+              <text id="speedo-kmh" x="120" y="118" text-anchor="middle" font-size="26" font-weight="700" fill="#ffffff" font-family="Mulish,sans-serif">0</text>
+              <text x="120" y="131" text-anchor="middle" font-size="8" fill="rgba(201,169,110,0.65)" font-family="Mulish,sans-serif" letter-spacing="2">KM/H</text>
             </svg>
           </div>
           <div style="text-align:center">
@@ -1616,24 +1688,22 @@
       <div class="dash-card dash-wide">
         <p class="dash-card-title" data-i18n="dash.howtowin">Comment gagner la voiture ?</p>
         <p class="fr-txt" style="font-size:.9rem;color:var(--text-mid);line-height:1.8">
-          À la clôture de la campagne le <strong style="color:var(--bleu)">27 juillet 2026</strong>, Morocco Mall sélectionnera les
-          <strong style="color:var(--corail)">20 participants ayant le plus grand total d'achats cumulés</strong>.
-          L'un d'eux remportera la <strong style="color:var(--bleu)">Soueast S05</strong> d'une valeur de 300 000 MAD.
-          Soumettez un maximum de tickets pour maximiser votre total et figurer dans le Top 20 !
+          À la clôture de l'opération, les <strong style="color:var(--corail)">20 participants ayant cumulé le plus grand montant d'achats</strong> seront sélectionnés pour la finale.
+          Plus vous téléchargez de tickets, plus votre total augmente et plus vous vous rapprochez du Top 20.
+          L'un des finalistes remportera la <strong style="color:var(--bleu)">Soueast S05</strong> d'une valeur de <strong>300 000 DH</strong>.
         </p>
         <p class="ar-txt" style="font-size:.9rem;color:var(--text-mid);line-height:2">
-          في نهاية الحملة بتاريخ <strong style="color:var(--bleu)">27 يوليوز 2026</strong>، سيختار موروكو مول
-          <strong style="color:var(--corail)">أفضل 20 مشارك من حيث إجمالي المشتريات المتراكمة</strong>.
-          سيفوز أحدهم بسيارة <strong style="color:var(--bleu)">سوييست S05</strong> بقيمة 300.000 درهم.
-          قدّم أكبر عدد من الفواتير لتعظيم إجماليك والدخول في أفضل 20!
+          عند نهاية الحملة، سيتم اختيار <strong style="color:var(--corail)">20 مشاركًا حققوا أعلى إجمالي للمشتريات</strong> للتأهل إلى المرحلة النهائية.
+          كلما قمت بتحميل المزيد من إيصالات الشراء، ارتفع إجمالي مشترياتك واقتربت أكثر من قائمة أفضل 20 متسوقًا.
+          وسيفوز أحد المتأهلين بسيارة <strong style="color:var(--bleu)">Soueast S05</strong> بقيمة <strong>300.000 درهم</strong>.
         </p>
         <div class="top20-box">
           <span style="font-size:1.5rem">🏆</span>
           <div>
-            <p class="fr-txt" style="font-size:.78rem;font-weight:600;color:var(--text)">Votre objectif : figurer dans le Top 20</p>
-            <p class="ar-txt" style="font-size:.78rem;font-weight:600;color:var(--text)">هدفك: الدخول في أفضل 20</p>
-            <p class="fr-txt" style="font-size:.72rem;color:var(--text-muted)">Plus votre total est élevé, plus vous avez de chances d'être sélectionné(e).</p>
-            <p class="ar-txt" style="font-size:.72rem;color:var(--text-muted)">كلما ارتفع إجماليك، زادت فرصك في الاختيار.</p>
+            <p class="fr-txt" style="font-size:.78rem;font-weight:600;color:var(--text)">Objectif : intégrer le Top 20</p>
+            <p class="ar-txt" style="font-size:.78rem;font-weight:600;color:var(--text)">هدفك: الوصول إلى قائمة أفضل 20 متسوقًا</p>
+            <p class="fr-txt" style="font-size:.72rem;color:var(--text-muted)">Continuez à cumuler vos achats pour améliorer votre position et maximiser vos chances d'accéder à la finale.</p>
+            <p class="ar-txt" style="font-size:.72rem;color:var(--text-muted)">واصل تجميع مشترياتك لتحسين ترتيبك وتعزيز فرصك في التأهل إلى المرحلة النهائية.</p>
           </div>
         </div>
       </div>
@@ -1829,8 +1899,8 @@
     </div>
     <div class="success-screen" id="upload-success">
       <span class="success-icon">🎉</span>
-      <h3 data-i18n="upload.ok.h">Ticket enregistré !</h3>
-      <p data-i18n="upload.ok.p">Votre ticket est enregistré. Continuez à soumettre pour monter dans le classement et intégrer le Top 20 !</p>
+      <h3 data-i18n="upload.ok.h">Votre ticket a bien été pris en compte.</h3>
+      <p data-i18n="upload.ok.p">Votre montant a été ajouté à votre total d'achats. Continuez à télécharger vos tickets pour améliorer votre classement et vous rapprocher du Top 20.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px">
         <button class="btn btn-or btn-sm" onclick="addAnotherTicket()" data-i18n="upload.another">Ajouter un autre ticket</button>
         <button class="btn btn-outline-bleu btn-sm" onclick="goToDashboard()" data-i18n="cta.dash">Mon tableau de bord</button>
@@ -1847,7 +1917,7 @@
     <button class="sticky-close" onclick="dismissSticky()" aria-label="Fermer">✕</button>
     <p class="sticky-title" data-i18n="sticky.line2">Gagnez la Soueast S05 — 300 000 MAD</p>
     <p class="sticky-sub">Fin dans <strong id="sticky-days">52j</strong> · Jeu-concours Morocco Mall · Du 6 au 27 juillet 2026</p>
-    <button class="btn btn-primary" onclick="handleUploadCTA()" style="width:100%;margin-bottom:4px" data-i18n="nav.cta">Participer</button>
+    <button class="btn btn-primary" onclick="handleUploadCTA()" style="width:100%;margin-bottom:4px" data-i18n="nav.cta">Je participe</button>
   </div>
 </div>
 
@@ -1863,52 +1933,52 @@
       'meta.title':    'Drive Your Summer – Gagnez une Soueast S05 à Morocco Mall',
       'meta.desc':     'Participez au jeu-concours Morocco Mall du 6 au 27 juillet 2026. Dépensez 1 000 MAD, uploadez votre ticket et tentez de gagner une Soueast S05 électrique à 300 000 MAD.',
       'nav.sub':       'Morocco Mall × Soueast S05',
-      'nav.cta':       'Participer',
+      'nav.cta':       'Je participe',
       'hero.tag':      '6 juillet – 27 juillet 2026',
-      'hero.sub':      'Drive into summer. Win the ultimate reward.',
-      'hero.cta1':     'Télécharger mon ticket',
+      'hero.sub':      'Jusqu\'à -70% sur plus de 360 marques et une Soueast S05 à gagner.',
+      'hero.cta1':     'Je participe',
       'hero.cta2':     'Voir les règles',
-      'hero.cdlbl':    'Fin de la campagne dans',
+      'hero.cdlbl':    'Le compte à rebours est lancé.',
       'cd.d': 'Jours', 'cd.h': 'Heures', 'cd.m': 'Minutes', 'cd.s': 'Secondes',
       'hero.scroll':   'Découvrir',
       'rules.eyebrow': 'La règle du jeu',
       'rules.cta1':    'Je participe maintenant',
-      'rules.cta2':    'Voir la voiture à gagner',
-      'car.cta':       '🏎️ Je veux cette voiture !',
-      'cta.btn1':      'Télécharger mon ticket maintenant',
-      'cta.dash':      'Mon tableau de bord',
+      'rules.cta2':    'Je découvre la Soueast S05',
+      'car.cta':       'Je tente ma chance',
+      'cta.btn1':      'Je télécharge mon ticket de caisse',
+      'cta.dash':      'Accéder à mon espace',
       'dash.back':     'Retour',
       'dash.welcome':  'Bienvenue,',
-      'dash.sub':      'Suivez votre progression et téléchargez de nouveaux tickets.',
+      'dash.sub':      'Suivez votre progression, augmentez votre total d\'achats et rapprochez-vous du Top 20.',
       'dash.logout':   'Se déconnecter',
-      'dash.newticket':'Nouveau ticket',
+      'dash.newticket':'Ajouter un ticket',
       'dash.mytickets':'Mes tickets →',
       'dash.progress': 'Ma progression',
       'dash.levels':   'Niveaux de participation',
-      'dash.howtowin': 'Comment gagner la voiture ?',
+      'dash.howtowin': 'Comment remporter la Soueast S05 ?',
       'receipts.back': 'Tableau de bord',
       'receipts.add':  'Ajouter un ticket',
       'sticky.days':   'j restants',
       'sticky.line2':  'Gagnez la Soueast S05 — 300 000 MAD',
-      'upload.title':  'Soumettre un ticket',
-      'upload.sub':    'Photo claire du ticket + montant total.',
-      'upload.zone.h': 'Photo de votre ticket',
+      'upload.title':  'Ajouter un ticket',
+      'upload.sub':    'Téléchargez une photo claire de votre ticket et renseignez le montant total de vos achats.',
+      'upload.zone.h': 'Téléchargez votre ticket de caisse',
       'upload.zone.p': 'Appuyez ici pour déposer votre photo',
-      'upload.label':  'Montant total du ticket',
-      'upload.min':    'Minimum 1 000 MAD pour être éligible.',
-      'upload.submit': '🚗 Valider ma participation',
-      'upload.ok.h':   'Ticket enregistré !',
-      'upload.ok.p':   'Votre ticket est enregistré. Continuez à soumettre pour monter dans le classement et intégrer le Top 20 !',
-      'upload.another':'Ajouter un autre ticket',
-      'reg.title':     'Créer mon compte',
-      'reg.sub':       'Un compte pour suivre toutes vos participations.',
+      'upload.label':  'Montant total des achats',
+      'upload.min':    'Montant minimum requis : 1 000 DH pour participer. Les achats d\'un montant inférieur à 1 000 DH ne sont pas éligibles à l\'opération.',
+      'upload.submit': 'Enregistrer mon ticket',
+      'upload.ok.h':   'Votre ticket a bien été pris en compte.',
+      'upload.ok.p':   'Votre montant a été ajouté à votre total d\'achats. Continuez à télécharger vos tickets pour améliorer votre classement et vous rapprocher du Top 20.',
+      'upload.another':'Télécharger un autre ticket',
+      'reg.title':     'Créez votre compte',
+      'reg.sub':       'Suivez vos participations, votre progression et votre classement tout au long de l\'opération.',
       'reg.first':     'Prénom',
       'reg.last':      'Nom',
       'reg.phone':     'Numéro de téléphone',
       'reg.email':     'Email',
       'reg.pin.lbl':   'Code secret',
       'reg.submit':    'Créer mon compte & continuer →',
-      'reg.privacy':   'Vos données sont sécurisées et ne seront utilisées que dans le cadre de ce jeu-concours.',
+      'reg.privacy':   'Vos informations sont sécurisées et utilisées uniquement dans le cadre de cette opération.',
       'login.title':   'Se connecter',
       'login.sub':     'Accédez à votre espace de participation.',
       'login.phone':   'Numéro de téléphone',
@@ -1927,7 +1997,7 @@
       'forgot.code.lbl': 'Entrez le code',
       'forgot.pin.lbl':  'Nouveau code secret (4 chiffres)',
       'forgot.submit':   'Réinitialiser mon code',
-      'reg.hasaccount':  'Déjà un compte ?',
+      'reg.hasaccount':  'Vous avez déjà un compte ?',
       'reg.signin':      'Se connecter',
     },
     ar: {
@@ -1936,50 +2006,50 @@
       'nav.sub':       'موروكو مول × سوييست S05',
       'nav.cta':       'شارك',
       'hero.tag':      '6 يوليوز – 27 يوليوز 2026',
-      'hero.sub':      'انطلق نحو الصيف، واربح الجائزة الكبرى.',
-      'hero.cta1':     'حمّل فاتورتك',
-      'hero.cta2':     'شوف القواعد',
-      'hero.cdlbl':    'ينتهي العرض خلال',
+      'hero.sub':      'استفد من تخفيضات تصل إلى 70% على أكثر من 360 علامة تجارية، واغتنم فرصتك للفوز بسيارة Soueast S05',
+      'hero.cta1':     'أشارك الآن',
+      'hero.cta2':     'الشروط والأحكام',
+      'hero.cdlbl':    'بدأ العدّ التنازلي.',
       'cd.d': 'أيام', 'cd.h': 'ساعات', 'cd.m': 'دقائق', 'cd.s': 'ثوانٍ',
       'hero.scroll':   'اكتشف',
       'rules.eyebrow': 'قواعد اللعبة',
-      'rules.cta1':    'شارك الآن',
-      'rules.cta2':    'شوف السيارة',
-      'car.cta':       '🏎️ أريد هذه السيارة!',
-      'cta.btn1':      'حمّل فاتورتك الآن',
-      'cta.dash':      'لوحة التحكم',
+      'rules.cta1':    'Je participe maintenant',
+      'rules.cta2':    'Je découvre la Soueast S05',
+      'car.cta':       'أجرّب حظي',
+      'cta.btn1':      'حمّل إيصال الشراء الآن',
+      'cta.dash':      'العودة إلى حسابي',
       'dash.back':     'رجوع',
       'dash.welcome':  'مرحباً بك،',
-      'dash.sub':      'تابع تقدمك وحمّل فواتير جديدة.',
+      'dash.sub':      'تابع تقدّمك، وزِد من إجمالي مشترياتك، واقترب أكثر من قائمة أفضل 20 متسوقًا.',
       'dash.logout':   'تسجيل الخروج',
-      'dash.newticket':'فاتورة جديدة',
-      'dash.mytickets':'← فواتيري',
+      'dash.newticket':'إضافة إيصال شراء',
+      'dash.mytickets':'← إيصالاتي',
       'dash.progress': 'تقدمي',
       'dash.levels':   'مستويات المشاركة',
-      'dash.howtowin': 'كيف تفوز بالسيارة؟',
+      'dash.howtowin': 'كيف تفوز بسيارة Soueast S05 ؟',
       'receipts.back': 'لوحة التحكم',
       'receipts.add':  'أضف فاتورة',
       'sticky.days':   'أيام متبقية',
       'sticky.line2':  'فوز بسوييست S05 — 300.000 درهم',
-      'upload.title':  'تقديم فاتورة',
-      'upload.sub':    'صورة واضحة للفاتورة + المبلغ الإجمالي.',
-      'upload.zone.h': 'صورة فاتورتك',
-      'upload.zone.p': 'اضغط هنا لإضافة صورتك',
-      'upload.label':  'المبلغ الإجمالي للفاتورة',
-      'upload.min':    'الحد الأدنى 1.000 درهم للأهلية.',
-      'upload.submit': '🚗 تأكيد مشاركتي',
-      'upload.ok.h':   'تم تسجيل الفاتورة!',
-      'upload.ok.p':   'تم تسجيل فاتورتك. واصل التقديم للتسلق في الترتيب والدخول في أفضل 20!',
-      'upload.another':'إضافة فاتورة أخرى',
-      'reg.title':     'إنشاء حسابي',
-      'reg.sub':       'حساب لمتابعة جميع مشاركاتك.',
+      'upload.title':  'إضافة إيصال شراء',
+      'upload.sub':    'حمّل صورة واضحة لإيصال الشراء وأدخل إجمالي مبلغ مشترياتك.',
+      'upload.zone.h': 'تحميل إيصال الشراء',
+      'upload.zone.p': 'اضغط هنا لإضافة الصورة',
+      'upload.label':  'إجمالي مبلغ المشتريات',
+      'upload.min':    'الحد الأدنى للمشاركة هو 1000 درهم.',
+      'upload.submit': 'إضافة إيصال الشراء',
+      'upload.ok.h':   'تمت إضافة إيصال الشراء إلى رصيدك الإجمالي.',
+      'upload.ok.p':   'واصل تحميل إيصالات الشراء لزيادة إجمالي مشترياتك وتحسين ترتيبك والاقتراب أكثر من قائمة أفضل 20 متسوقًا.',
+      'upload.another':'تحميل إيصال آخر',
+      'reg.title':     'إنشاء حساب',
+      'reg.sub':       'أنشئ حسابك لمتابعة مشاركاتك وتقدّمك وترتيبك طوال مدة المسابقة.',
       'reg.first':     'الاسم الأول',
       'reg.last':      'اسم العائلة',
       'reg.phone':     'رقم الهاتف',
       'reg.email':     'البريد الإلكتروني',
       'reg.pin.lbl':   'الرمز السري',
       'reg.submit':    'إنشاء حسابي والمتابعة ←',
-      'reg.privacy':   'بياناتك آمنة ولن تُستخدم إلا في إطار هذه المسابقة.',
+      'reg.privacy':   'يتم تأمين بياناتك واستخدامها حصريًا في إطار هذه العملية.',
       'login.title':   'تسجيل الدخول',
       'login.sub':     'ادخل إلى فضاء مشاركتك.',
       'login.phone':   'رقم الهاتف',
@@ -1998,7 +2068,7 @@
       'forgot.code.lbl': 'أدخل الرمز',
       'forgot.pin.lbl':  'رمز سري جديد (4 أرقام)',
       'forgot.submit':   'إعادة تعيين رمزي',
-      'reg.hasaccount':  'لديك حساب بالفعل؟',
+      'reg.hasaccount':  'لديك حساب ؟',
       'reg.signin':      'تسجيل الدخول',
     },
   };
@@ -2105,7 +2175,7 @@
   /* ─── NAV ────────────────────────────────────────── */
   function updateNavActions() {
     const nav = document.getElementById('nav-actions');
-    const cta  = T[currentLang]?.['nav.cta'] || 'Participer';
+    const cta  = T[currentLang]?.['nav.cta'] || 'Je participe';
     const dash = currentLang === 'ar' ? 'لوحتي' : 'Mon espace';
     // Rebuild keeping the lang toggle intact
     const langHtml = `<div class="lang-toggle" style="margin-right:8px">
@@ -2315,6 +2385,19 @@
     setTimeout(() => { showLoginForm(null); openOverlay('overlay-login'); }, 200);
   }
 
+  function setUploadModalHd(mode) {
+    const T = translations[currentLang] || translations.fr;
+    const hEl = document.querySelector('#overlay-upload [data-i18n="upload.title"]');
+    const pEl = document.querySelector('#overlay-upload [data-i18n="upload.sub"]');
+    if (mode === 'success') {
+      if (hEl) hEl.textContent = T['upload.ok.h'] || 'Votre ticket a bien été pris en compte.';
+      if (pEl) pEl.textContent = T['upload.ok.p'] || '';
+    } else {
+      if (hEl) hEl.textContent = T['upload.title'] || 'Ajouter un ticket';
+      if (pEl) pEl.textContent = T['upload.sub']   || 'Téléchargez une photo claire de votre ticket et renseignez le montant total de vos achats.';
+    }
+  }
+
   function openUpload() {
     document.getElementById('upload-form-wrap').style.display = 'block';
     document.getElementById('upload-success').classList.remove('show');
@@ -2323,6 +2406,7 @@
     document.getElementById('upload-fname').classList.remove('show');
     document.getElementById('upload-amount').value = '';
     state.pendingDataURL = null;
+    setUploadModalHd('form');
     openOverlay('overlay-upload');
   }
 
@@ -2362,6 +2446,7 @@
     saveState();
     document.getElementById('upload-form-wrap').style.display = 'none';
     document.getElementById('upload-success').classList.add('show');
+    setUploadModalHd('success');
     showToast(currentLang==='ar' ? '🎉 تم تسجيل الفاتورة! تم تحديث إجماليك.' : '🎉 Ticket enregistré ! Votre total a été mis à jour.', 'success');
     updateNavActions();
   }
@@ -2469,25 +2554,39 @@
     showLoginForm(null);
   }
 
-  /* ─── ROAD PROGRESS ─────────────────────────────── */
-  function updateRoadProgress(total) {
-    const roadPath = document.getElementById('road-path');
-    const carEl    = document.getElementById('road-car');
-    if (!roadPath || !carEl) return;
-    const MAX  = 50000;
-    const pct  = Math.min(total / MAX, 1);
-    const len  = roadPath.getTotalLength();
-    const pos  = pct * len;
-    const pt   = roadPath.getPointAtLength(pos);
-    // Tangent: sample slightly ahead
-    const fwd  = roadPath.getPointAtLength(Math.min(len, pos + 6));
-    let dx = fwd.x - pt.x, dy = fwd.y - pt.y;
-    if (dx === 0 && dy === 0) {
-      const bck = roadPath.getPointAtLength(Math.max(0, pos - 6));
-      dx = pt.x - bck.x; dy = pt.y - bck.y;
-    }
-    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
-    carEl.setAttribute('transform', `translate(${pt.x},${pt.y}) rotate(${angle})`);
+  /* ─── SPEEDOMETER PROGRESS ──────────────────────── */
+  function updateSpeedometer(total) {
+    const needle  = document.getElementById('speedo-needle-group');
+    const arcEl   = document.getElementById('speedo-arc');
+    const speedEl = document.getElementById('speedo-kmh');
+    if (!needle || !arcEl || !speedEl) return;
+
+    const MAX    = 50000;
+    const pct    = Math.min(total / MAX, 1);
+    const toDeg  = pct * 270;
+    const toKmh  = Math.round(pct * 260);
+
+    // Read current rotation from existing transform
+    const cur     = needle.getAttribute('transform') || 'translate(120,95) rotate(0)';
+    const match   = cur.match(/rotate\(([^)]+)\)/);
+    const fromDeg = match ? parseFloat(match[1]) : 0;
+    const fromKmh = Math.round(fromDeg / 270 * 260);
+
+    // Animate needle and km/h counter via rAF
+    const t0 = performance.now();
+    const dur = 1400;
+    function ease(t) { return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2; }
+    (function tick(now) {
+      const t  = Math.min(1, (now - t0) / dur);
+      const e  = ease(t);
+      const deg = fromDeg + (toDeg - fromDeg) * e;
+      needle.setAttribute('transform', `translate(120,95) rotate(${deg})`);
+      speedEl.textContent = Math.round(fromKmh + (toKmh - fromKmh) * e);
+      if (t < 1) requestAnimationFrame(tick);
+    })(t0);
+
+    // Arc fill via CSS transition
+    arcEl.style.strokeDashoffset = (353.4 * (1 - pct)).toFixed(1);
   }
 
   /* ─── DASHBOARD ──────────────────────────────────── */
@@ -2504,15 +2603,17 @@
     const locale  = isAr ? 'ar-MA' : 'fr-MA';
 
     if (totEl) totEl.textContent = total.toLocaleString(locale);
-    setTimeout(() => updateRoadProgress(total), 120);
+    setTimeout(() => updateSpeedometer(total), 120);
 
-    // Encouraging message — no level names
+    // Encouraging message
     if (total === 0) {
-      if (badgeEl) badgeEl.textContent = isAr ? '🛒 Commencez à acheter !' : '🛒 Commencez à acheter !';
-      if (nextEl)  nextEl.textContent  = isAr ? 'Chaque ticket compte pour le Top 20' : 'Chaque ticket compte pour le Top 20';
+      if (badgeEl) badgeEl.textContent = isAr ? 'أشارك الآن' : 'Je participe';
+      if (nextEl)  nextEl.textContent  = isAr ? 'كل إيصال يقرّبك من قائمة أفضل 20 متسوقًا' : 'Chaque ticket compte et vous rapproche de la victoire.';
     } else {
       if (badgeEl) badgeEl.textContent = isAr ? `🏆 ${total.toLocaleString(locale)} درهم` : `🏆 ${total.toLocaleString(locale)} MAD`;
-      if (nextEl)  nextEl.textContent  = isAr ? 'واصل التقديم للدخول في أفضل 20!' : 'Continuez, chaque ticket vous rapproche du Top 20 !';
+      if (nextEl)  nextEl.textContent  = isAr
+        ? 'أنت على الطريق الصحيح. واصل تحميل إيصالات الشراء للارتقاء في الترتيب.'
+        : 'Vous êtes sur la bonne voie. Continuez à télécharger vos tickets pour grimper dans le classement.';
     }
   }
 
@@ -2568,15 +2669,40 @@
     setTimeout(() => { t.style.opacity='0'; t.style.transform='translateX(18px)'; t.style.transition='.3s'; setTimeout(()=>t.remove(),300); }, 4000);
   }
 
-  /* ─── HERO ───────────────────────────────────────── */
-  function initHeroBg() {
-    const bg = document.getElementById('hero-bg');
-    if (!bg) return;
-    setTimeout(() => bg.classList.add('loaded'), 100);
-    window.addEventListener('scroll', () => {
-      if (state.currentPage !== 'landing') return;
-      bg.style.transform = `scale(1) translateY(${window.scrollY * 0.28}px)`;
-    }, { passive:true });
+  /* ─── HERO SLIDER ────────────────────────────────── */
+  function initHeroSlider() {
+    const slider = document.getElementById('hero-slider');
+    const dotsWrap = document.getElementById('hero-dots');
+    if (!slider || !dotsWrap) return;
+    const dots = dotsWrap.querySelectorAll('.hero-dot');
+    const count = dots.length;
+
+    function setActive(idx) {
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    }
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const i = parseInt(dot.dataset.idx, 10);
+        slider.scrollTo({ left: slider.offsetWidth * i, behavior: 'smooth' });
+      });
+    });
+
+    let scrollTick;
+    slider.addEventListener('scroll', () => {
+      cancelAnimationFrame(scrollTick);
+      scrollTick = requestAnimationFrame(() => {
+        const idx = Math.round(slider.scrollLeft / slider.offsetWidth);
+        setActive(Math.max(0, Math.min(idx, count - 1)));
+      });
+    }, { passive: true });
+
+    let autoTimer = setInterval(() => {
+      const idx = Math.round(slider.scrollLeft / slider.offsetWidth);
+      const next = (idx + 1) % count;
+      slider.scrollTo({ left: slider.offsetWidth * next, behavior: 'smooth' });
+    }, 5000);
+    slider.addEventListener('touchstart', () => { clearInterval(autoTimer); autoTimer = null; }, { passive: true, once: true });
   }
 
   /* ─── INIT ───────────────────────────────────────── */
@@ -2590,7 +2716,7 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
     initFadeUps();
-    initHeroBg();
+    initHeroSlider();
     if (state.user) { const b=document.getElementById('btn-my-dashboard'); if(b) b.style.display='inline-flex'; }
   });
 </script>
