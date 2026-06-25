@@ -725,12 +725,13 @@
     .overlay {
       position: fixed; inset: 0;
       background: rgba(26,18,10,.74);
+      -webkit-backdrop-filter: blur(14px);
       backdrop-filter: blur(14px);
       z-index: 1000; display: flex; align-items: center; justify-content: center;
-      padding: 20px; opacity: 0; pointer-events: none;
+      padding: 16px; opacity: 0; pointer-events: none;
       transition: opacity .3s ease;
     }
-    .overlay.open { opacity: 1; pointer-events: all; }
+    .overlay.open { opacity: 1; pointer-events: auto; }
     .modal {
       background: #fff;
       border: 1px solid var(--border); border-radius: var(--r);
@@ -1244,20 +1245,22 @@
 
       /* ── Hero slider — mobile adjustments ── */
       /* Hero slider — mobile */
-      .hero-title-block { left: 18px; bottom: max(88px, 12vh); max-width: calc(100% - 36px); }
+      .hero-title-block { left: 18px; bottom: max(56px, 8vh); max-width: calc(60% - 18px); }
       .hero-topright    { top: max(72px, 10vh); right: 18px; gap: 10px; }
       .hero-badge-70    { padding: 7px 13px; }
       .hero-badge-pct   { font-size: 1.25rem; }
       .hero-badge-label { font-size: .48rem; letter-spacing: .14em; }
       .hero-mm-logo     { height: 15px; }
-      .hero-cd-wrap     { right: 18px; bottom: 36px; }
+      .hero-cd-wrap     { right: 18px; bottom: 56px; }
+      .hero-cd-wrap .cd-lbl-title { display: none; }
+      .hero-cd-wrap .cd-frame { padding: 6px 10px; }
       .cd-item          { min-width: 38px; }
-      .hero-dots        { bottom: 10px; gap: 7px; }
+      .hero-dots        { bottom: 20px; gap: 7px; }
       .hero-dot         { width: 6px; height: 6px; }
       .hero-sub-slide   { font-size: clamp(.8rem, 3.8vw, .92rem); line-height: 1.5; }
       .nowrap-lg        { white-space: normal; }
       .rules-tagline    { font-size: .72rem; letter-spacing: .1em; margin-top: 14px; }
-      [dir="rtl"] .hero-title-block { left: auto; right: 18px; }
+      [dir="rtl"] .hero-title-block { left: auto; right: 18px; max-width: calc(60% - 18px); }
       [dir="rtl"] .hero-topright    { right: auto; left: 18px; }
       [dir="rtl"] .hero-cd-wrap     { right: auto; left: 18px; }
 
@@ -1299,6 +1302,9 @@
       .showcase-inner { gap: 28px; }
       .car-visual { width: 100%; }
       .carousel-outer { border-radius: 10px; }
+      .car-info { text-align: center; }
+      .car-specs { justify-content: center; }
+      .car-info > .btn { width: 100%; }
       [dir="rtl"] .car-info { text-align: center; }
       [dir="rtl"] .car-specs { justify-content: center; }
       [dir="rtl"] .car-info > .btn { width: 100%; }
@@ -2247,6 +2253,9 @@
         <div class="mob-menu-user">👋 ${state.user.firstName}</div>
         ${langHtmlMob}
         <hr class="mob-divider">
+        <button class="mob-menu-item primary" onclick="closeMobileMenu();setTimeout(openUpload,80)">
+          ${isAr ? 'تحميل إيصال الشراء' : 'Télécharger un ticket'}
+        </button>
         <button class="mob-menu-item" onclick="showPage('dashboard');closeMobileMenu()">
           ${isAr ? 'لوحتي' : 'Mon espace'}
         </button>
@@ -2399,12 +2408,15 @@
   }
 
   function openUpload() {
-    document.getElementById('upload-form-wrap').style.display = 'block';
-    document.getElementById('upload-success').classList.remove('show');
-    document.getElementById('file-input').value = '';
-    document.getElementById('upload-preview').classList.remove('show');
-    document.getElementById('upload-fname').classList.remove('show');
-    document.getElementById('upload-amount').value = '';
+    const formWrap = document.getElementById('upload-form-wrap');
+    const successEl = document.getElementById('upload-success');
+    if (!formWrap || !successEl) return;
+    formWrap.style.display = 'block';
+    successEl.classList.remove('show');
+    const fi = document.getElementById('file-input');     if (fi)  fi.value = '';
+    const pv = document.getElementById('upload-preview'); if (pv)  pv.classList.remove('show');
+    const fn = document.getElementById('upload-fname');   if (fn)  fn.classList.remove('show');
+    const am = document.getElementById('upload-amount');  if (am)  am.value = '';
     state.pendingDataURL = null;
     setUploadModalHd('form');
     openOverlay('overlay-upload');
