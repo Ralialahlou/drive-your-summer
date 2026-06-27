@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:gh-pages": "VITE_BASE=/drive-your-summer/ tsc -b && VITE_BASE=/drive-your-summer/ vite build",
     "preview": "vite preview",
     "optimize-images": "node scripts/optimize-images.mjs"
   },
