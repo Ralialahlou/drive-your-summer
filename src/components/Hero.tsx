@@ -3,12 +3,12 @@ import { useStore } from '../store'
 import { useCountdown } from '../hooks/useCountdown'
 
 const SLIDES = [
-  '/assets/img/keys/Key2.png',
-  '/assets/img/keys/Key12.png',
-  '/assets/img/keys/Key19.png',
-  '/assets/img/keys/Key22.png',
-  '/assets/img/keys/Key23.png',
-  '/assets/img/keys/Key24.png',
+  '/assets/img/keys/Key2.webp',
+  '/assets/img/keys/Key12.webp',
+  '/assets/img/keys/Key19.webp',
+  '/assets/img/keys/Key22.webp',
+  '/assets/img/keys/Key23.webp',
+  '/assets/img/keys/Key24.webp',
 ]
 
 export function Hero() {

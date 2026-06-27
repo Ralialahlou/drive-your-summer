@@ -41,7 +41,7 @@ export function RegisterModal({ open, onClose, onSwitchToLogin, onRegistered }: 
     <div className={`overlay ${open ? 'open' : ''}`} id="overlay-register">
       <div className="modal">
         <div className="modal-hd">
-          <img src="/assets/mm-wordmark.png" alt="Morocco Mall" className="modal-mm-logo" />
+          <img src="/assets/mm-wordmark.webp" alt="Morocco Mall" className="modal-mm-logo" />
           <div className="modal-hd-text">
             <h3>{t('reg.title')}</h3>
             <p>{t('reg.sub')}</p>

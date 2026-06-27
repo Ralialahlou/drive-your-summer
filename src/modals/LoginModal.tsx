@@ -122,7 +122,7 @@ export function LoginModal({ open, onClose, onSwitchToRegister, onLoggedIn }: Pr
     <div className={`overlay ${open ? 'open' : ''}`} id="overlay-login">
       <div className="modal">
         <div className="modal-hd">
-          <img src="/assets/mm-wordmark.png" alt="Morocco Mall" className="modal-mm-logo" />
+          <img src="/assets/mm-wordmark.webp" alt="Morocco Mall" className="modal-mm-logo" />
           <div className="modal-hd-text">
             <h3 id="login-modal-title">{title}</h3>
             <p id="login-modal-sub">{subtitle}</p>

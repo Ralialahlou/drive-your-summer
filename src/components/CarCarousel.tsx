@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 
 const IMAGES = [
-  { src: '/assets/soueast-1.jpg', alt: 'Soueast S05 noir' },
-  { src: '/assets/soueast-2.jpg', alt: 'Soueast S05 argent' },
-  { src: '/assets/soueast-3.jpg', alt: 'Soueast S05 gris' },
-  { src: '/assets/soueast-4.jpg', alt: 'Soueast S05 intérieur' },
-  { src: '/assets/soueast-5.jpg', alt: 'Soueast S05 en conduite' },
+  { src: '/assets/soueast-1.webp', alt: 'Soueast S05 noir' },
+  { src: '/assets/soueast-2.webp', alt: 'Soueast S05 argent' },
+  { src: '/assets/soueast-3.webp', alt: 'Soueast S05 gris' },
+  { src: '/assets/soueast-4.webp', alt: 'Soueast S05 intérieur' },
+  { src: '/assets/soueast-5.webp', alt: 'Soueast S05 en conduite' },
 ]
 
 export function CarCarousel() {

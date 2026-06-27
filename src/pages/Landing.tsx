@@ -225,13 +225,13 @@ export function Landing({ onUploadCTA }: Props) {
 
       {/* WORLD CUP BANNER */}
       <div className="wc-banner">
-        <img src="/assets/image-end-of-page.png" alt="Morocco Mall soutient l'Équipe Nationale" />
+        <img src="/assets/image-end-of-page.webp" alt="Morocco Mall soutient l'Équipe Nationale" />
       </div>
 
       {/* FOOTER */}
       <footer>
         <div className="footer-inner">
-          <img src="/assets/mm-wordmark.png" alt="Morocco Mall" className="footer-mm-logo" />
+          <img src="/assets/mm-wordmark.webp" alt="Morocco Mall" className="footer-mm-logo" />
           <div className="footer-brand">Drive Your <span>Summer</span></div>
           <div className="footer-divider" />
           <p className="footer-copy fr-txt">Summer Sales Morocco Mall × Soueast S05 — Été 2026</p>
